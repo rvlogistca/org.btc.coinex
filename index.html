@@ -80,23 +80,22 @@
       border-color: #ffd700;
       box-shadow: 0 0 15px rgba(255,215,0,0.5);
     }
-    .btn-binance {
-      background: linear-gradient(135deg, #F0B90B, #F8D12F);
-      color: #000;
-      font-weight: 900;
-      border: none;
-      box-shadow: 0 0 20px rgba(240,185,11,0.5);
-    }
-    .btn-binance:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(240,185,11,0.7);
-    }
     .status-conectado {
       background: rgba(0,255,100,0.15);
       color: #00ff64;
       border: 1px solid #00ff64;
     }
     .verde-usdt { color: #4ade80; }
+    .legenda-fundo {
+      font-size: 0.85rem;
+      color: #ffd700;
+      background: rgba(255,215,0,0.1);
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px dashed #ffd700;
+      margin-top: 6px;
+      display: inline-block;
+    }
   </style>
 </head>
 <body class="px-4 py-6 max-w-4xl mx-auto">
@@ -110,12 +109,15 @@
       </div>
     </div>
     <div class="flex justify-center gap-3 mb-3 flex-wrap">
-      <span class="badge-dono px-5 py-2 rounded-full text-sm">👑 Proprietário: Eliel Lara</span>
+      <span class="badge-dono px-5 py-2 rounded-full text-sm">👑 Eliel Lara</span>
       <span class="badge-diretor px-5 py-2 rounded-full text-sm">🎖️ Diretor: Floyd Menezes</span>
       <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm font-bold">✓ VERIFICADO</span>
       <span id="status-wallet" class="status-conectado px-3 py-1 rounded-full text-sm font-bold">● Conectado (Binance Web3)</span>
     </div>
-    <p id="atualizacao" class="text-sm text-yellow-400/60">Última atualização: ${new Date().toLocaleTimeString('pt-BR')}</p>
+    <p class="legenda-fundo text-center">
+      ⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>
+    </p>
+    <p id="atualizacao" class="text-sm text-yellow-400/60 mt-3">Última atualização: ${new Date().toLocaleTimeString('pt-BR')}</p>
   </header>
 
   <!-- SOBRE A EQUIPE -->
@@ -123,8 +125,11 @@
     <h2 class="text-lg font-bold texto-dourado mb-4">👥 Sobre a Equipe</h2>
     <div class="mb-5">
       <p class="font-black text-yellow-300 text-lg mb-1">👑 Eliel Lara</p>
-      <p class="text-sm text-yellow-100/90 leading-relaxed">
-        Proprietário e Desenvolvedor da Crypto Coinnex. Especialista em criação de plataformas e softwares, responsável pelo desenvolvimento técnico de múltiplos sistemas e pela fundação desta companhia.
+      <p class="text-sm text-yellow-100/90 leading-relaxed mb-2">
+        Fundador e Desenvolvedor da Crypto Coinnex. Especialista em criação de plataformas e softwares, responsável pelo desenvolvimento técnico de múltiplos sistemas e pela fundação desta companhia.
+      </p>
+      <p class="legenda-fundo">
+        ⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>
       </p>
     </div>
     <div>
@@ -139,7 +144,7 @@
   <div class="card-dourado p-5 mb-5">
     <h2 class="text-lg font-bold texto-dourado mb-3">📋 Observação Oficial da Companhia</h2>
     <p class="text-base text-yellow-100 leading-relaxed">
-      <strong class="text-yellow-300">75% de todos os valores e fundos garantidores</strong> serão destinados a garantir o projeto <strong class="texto-dourado">Cargo Crédito</strong> e <strong class="texto-dourado">Crédito de Carbono</strong>.
+      <strong class="text-yellow-300">75% de todos os valores e fundos garantidores</strong> serão destinados a garantir o projeto <strong class="texto-dourado">Cargo Crédito</strong> e <strong class="texto-dourado">Crédito de Carbono</strong>, através do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>.
     </p>
   </div>
 
@@ -237,16 +242,19 @@
       <p class="text-yellow-400/80 mt-1">Exchange Oficial · Powered by Binance Web3 Wallet</p>
       <p class="text-xs text-yellow-400/50 mt-3">© 2026 Crypto Coinnex · Todos os direitos reservados</p>
       
-      <div class="mt-5 space-y-2">
-        <p class="text-xl font-black texto-dourado">👑 Eliel Lara — Proprietário & Desenvolvedor</p>
-        <p class="text-sm text-yellow-100/80">Especialista em plataformas e softwares · Fundador da Crypto Coinnex</p>
+      <div class="mt-5 space-y-3">
+        <p class="text-xl font-black texto-dourado">👑 Eliel Lara</p>
+        <p class="legenda-fundo">
+          ⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>
+        </p>
+        <p class="text-sm text-yellow-100/80">Fundador & Desenvolvedor</p>
         <p class="text-lg font-bold text-gray-300 mt-3">🎖️ Floyd Menezes — Diretor da Companhia</p>
         <p class="text-sm text-yellow-100/80">Criador da Ethereum Brasil</p>
       </div>
 
       <div class="mt-5 p-3 rounded-lg border border-yellow-600/40 bg-yellow-900/20">
         <p class="text-xs text-yellow-300 font-bold mb-1">📋 Observação Oficial</p>
-        <p class="text-xs text-yellow-100/90">75% de todos os valores e fundos garantidores serão destinados a garantir o projeto Cargo Crédito e Crédito de Carbono.</p>
+        <p class="text-xs text-yellow-100/90">75% de todos os valores e fundos garantidores serão destinados a garantir o projeto Cargo Crédito e Crédito de Carbono, através do Fundo de Desenvolvimento do Projeto Crédito Carbono.</p>
       </div>
     </div>
   </footer>
