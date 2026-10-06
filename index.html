@@ -8,147 +8,66 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-    * { font-family: 'Inter', sans-serif; }
-    :root {
-      --ouro: #ffd700;
-      --ouro-escuro: #b8860b;
-      --verde: #22c55e;
-      --verde-escuro: #16a34a;
-      --fundo: #0a0800;
-      --card: #1a1500;
+    * { font-family:'Inter',sans-serif; box-sizing:border-box; }
+    :root{--ouro:#ffd700;--ouro-escuro:#b8860b;--verde:#22c55e;--fundo:#0a0800;--card:#1a1500}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--fundo);color:#fff;min-height:100vh;
+      background-image:radial-gradient(circle at top,rgba(255,215,0,.12),transparent 50%),radial-gradient(circle at bottom,rgba(34,197,94,.08),transparent 50%);
     }
-    body {
-      background: var(--fundo);
-      color: #fff;
-      min-height: 100vh;
-      background-image:
-        radial-gradient(circle at top, rgba(255,215,0,0.12), transparent 50%),
-        radial-gradient(circle at bottom, rgba(34,197,94,0.08), transparent 50%);
+    .card{background:var(--card);border-radius:16px;border:2px solid var(--ouro-escuro);box-shadow:0 0 20px rgba(255,215,0,.15);transition:.3s}
+    .card:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(255,215,0,.25)}
+    .card-dourado{background:linear-gradient(135deg,#2b2200,#1a1500);border:2px solid var(--ouro);box-shadow:0 0 35px rgba(255,215,0,.25);animation:brilho 3s infinite alternate}
+    .card-verde{background:linear-gradient(135deg,#0f2e1a,#0a1f12);border:2px solid var(--verde);box-shadow:0 0 25px rgba(34,197,94,.2)}
+    @keyframes brilho{from{box-shadow:0 0 35px rgba(255,215,0,.25)}to{box-shadow:0 0 45px rgba(255,215,0,.35)}}
+    .texto-dourado{background:linear-gradient(135deg,#ffd700,#ffec80,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+    .texto-verde{background:linear-gradient(135deg,#22c55e,#86efac,#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+    .badge-fundo{background:linear-gradient(135deg,#ffd700,#ffb800);color:#000;font-weight:900;box-shadow:0 0 15px rgba(255,215,0,.4)}
+    .badge-diretor{background:linear-gradient(135deg,#c0c0c0,#e8e8e8);color:#000;font-weight:900}
+    .address{font-family:'Courier New',monospace;font-size:.8rem;color:#ffd700;background:rgba(255,215,0,.08);word-break:break-all}
+    .copy-btn{cursor:pointer;transition:transform .2s;color:#ffd700}.copy-btn:hover{transform:scale(1.2)}
+    .btn{background:#2b2200;color:#ffd700;font-weight:700;border-radius:10px;border:2px solid #b8860b;transition:.3s}
+    .btn:hover,.btn.active{background:linear-gradient(135deg,#ffd700,#ffb800);color:#000;border-color:#ffd700;box-shadow:0 0 15px rgba(255,215,0,.5)}
+    .status-conectado{background:rgba(0,255,100,.15);color:#00ff64;border:1px solid #00ff64}
+    .verde-usdt{color:#4ade80}
+    .legenda-fundo{font-size:.85rem;color:#ffd700;background:rgba(255,215,0,.1);padding:6px 12px;border-radius:8px;border:1px dashed #ffd700;display:inline-block}
+    .barra{height:12px;border-radius:6px;background:#2a2510;overflow:hidden}.barra>span{display:block;height:100%;border-radius:6px;transition:width 1s}
+    nav a{transition:.25s}nav a:hover{color:#ffd700;transform:translateY(-2px)}
+
+    /* FOTO PREPARADA PARA O SITE */
+    .hero-photo{
+      position:relative;min-height:560px;border-radius:24px;overflow:hidden;
+      border:2px solid rgba(255,215,0,.55);
+      box-shadow:0 0 45px rgba(255,215,0,.18);
+      background:#080600;
+      display:flex;align-items:flex-end;
+      margin-bottom:40px;
     }
-    .card {
-      background: var(--card);
-      border-radius: 16px;
-      border: 2px solid var(--ouro-escuro);
-      box-shadow: 0 0 20px rgba(255,215,0,0.15);
-      transition: transform 0.3s, box-shadow 0.3s;
+    .hero-photo::before{
+      content:"";position:absolute;inset:0;
+      background-image:url("crypto-coinnex-hero.png");
+      background-size:cover;background-position:center center;
+      filter:saturate(1.05) contrast(1.04);
+      transform:scale(1.01);
     }
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 30px rgba(255,215,0,0.25);
+    .hero-photo::after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.25) 48%,rgba(5,4,0,.96) 100%);
     }
-    .card-dourado {
-      background: linear-gradient(135deg, #2b2200, #1a1500);
-      border: 2px solid var(--ouro);
-      box-shadow: 0 0 35px rgba(255,215,0,0.25);
-      animation: brilho 3s infinite alternate;
+    .hero-content{position:relative;z-index:2;width:100%;padding:36px;text-align:left}
+    .hero-title{font-size:clamp(2rem,6vw,4.5rem);line-height:.95;text-shadow:0 4px 25px #000}
+    .hero-subtitle{max-width:720px;margin-top:14px;color:#fff4bd;text-shadow:0 2px 12px #000}
+    @media(max-width:640px){
+      body{padding-left:12px!important;padding-right:12px!important}
+      .hero-photo{min-height:480px;border-radius:18px}
+      .hero-content{padding:22px}
+      .hero-title{font-size:clamp(2rem,12vw,3.2rem)}
     }
-    .card-verde {
-      background: linear-gradient(135deg, #0f2e1a, #0a1f12);
-      border: 2px solid var(--verde);
-      box-shadow: 0 0 25px rgba(34,197,94,0.2);
-    }
-    @keyframes brilho {
-      from { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
-      to { box-shadow: 0 0 45px rgba(255,215,0,0.35); }
-    }
-    .texto-dourado {
-      background: linear-gradient(135deg, #ffd700, #ffec80, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-    }
-    .texto-verde {
-      background: linear-gradient(135deg, #22c55e, #86efac, #22c55e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-    }
-    .badge-fundo {
-      background: linear-gradient(135deg, #ffd700, #ffb800);
-      color: #000;
-      font-weight: 900;
-      box-shadow: 0 0 15px rgba(255,215,0,0.4);
-    }
-    .badge-diretor {
-      background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
-      color: #000;
-      font-weight: 900;
-      box-shadow: 0 0 15px rgba(192,192,192,0.4);
-    }
-    .address {
-      font-family: 'Courier New', monospace;
-      font-size: 0.8rem;
-      color: #ffd700;
-      background: rgba(255,215,0,0.08);
-      word-break: break-all;
-    }
-    .copy-btn { cursor: pointer; transition: transform 0.2s; color: #ffd700; }
-    .copy-btn:hover { transform: scale(1.2); }
-    .btn {
-      background: #2b2200;
-      color: #ffd700;
-      font-weight: 700;
-      border-radius: 10px;
-      border: 2px solid #b8860b;
-      transition: all 0.3s;
-    }
-    .btn:hover, .btn.active {
-      background: linear-gradient(135deg, #ffd700, #ffb800);
-      color: #000;
-      border-color: #ffd700;
-      box-shadow: 0 0 15px rgba(255,215,0,0.5);
-    }
-    .btn-verde {
-      background: #0f2e1a;
-      color: #22c55e;
-      border: 2px solid #16a34a;
-    }
-    .btn-verde:hover {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(34,197,94,0.5);
-    }
-    .status-conectado {
-      background: rgba(0,255,100,0.15);
-      color: #00ff64;
-      border: 1px solid #00ff64;
-    }
-    .verde-usdt { color: #4ade80; }
-    .legenda-fundo {
-      font-size: 0.85rem;
-      color: #ffd700;
-      background: rgba(255,215,0,0.1);
-      padding: 6px 12px;
-      border-radius: 8px;
-      border: 1px dashed #ffd700;
-      display: inline-block;
-    }
-    .barra {
-      height: 12px;
-      border-radius: 6px;
-      background: #2a2510;
-      overflow: hidden;
-    }
-    .barra > span {
-      display: block;
-      height: 100%;
-      border-radius: 6px;
-      transition: width 1s ease-out;
-    }
-    nav a {
-      transition: all 0.25s;
-    }
-    nav a:hover {
-      color: #ffd700;
-      transform: translateY(-2px);
-    }
-    html { scroll-behavior: smooth; }
   </style>
 </head>
 <body class="px-4 py-6 max-w-4xl mx-auto">
 
-  <!-- 🔝 MENU DE NAVEGAÇÃO FIXO -->
-  <nav class="sticky top-0 z-50 mb-8 py-3 px-4 rounded-xl bg-black/60 backdrop-blur-md border border-yellow-600/30">
+  <nav class="sticky top-0 z-50 mb-8 py-3 px-4 rounded-xl bg-black/70 backdrop-blur-md border border-yellow-600/30">
     <div class="flex justify-between items-center flex-wrap gap-2 text-sm font-semibold">
       <a href="#início" class="text-yellow-300">🏠 Início</a>
       <a href="#fundo" class="text-yellow-300">🌿 O Fundo</a>
@@ -158,12 +77,26 @@
     </div>
   </nav>
 
-  <!-- 🏠 CABEÇALHO -->
+  <!-- FOTO PREPARADA + CAPA DO SITE -->
+  <section class="hero-photo" aria-label="Apresentação Crypto Coinnex">
+    <div class="hero-content">
+      <p class="text-yellow-300 font-bold tracking-[.2em] uppercase text-xs mb-3">Crypto Coinnex</p>
+      <h1 class="hero-title texto-dourado">Crédito Carbono<br>e ativos digitais</h1>
+      <p class="hero-subtitle text-sm md:text-lg">
+        Plataforma de apresentação do projeto, fundos, ativos e iniciativas ambientais.
+      </p>
+      <div class="flex flex-wrap gap-2 mt-5">
+        <a href="#ativos" class="btn px-5 py-3 inline-block">📊 Ver ativos</a>
+        <a href="#fundo" class="btn px-5 py-3 inline-block">🌿 Conhecer o fundo</a>
+      </div>
+    </div>
+  </section>
+
   <header id="início" class="text-center mb-10">
     <div class="inline-flex items-center gap-3 mb-3">
       <div class="w-14 h-14 rounded-full flex items-center justify-center text-2xl font-black" style="background:linear-gradient(135deg,#ffd700,#ffb800);color:#000">C</div>
       <div class="text-left">
-        <h1 class="text-3xl font-black tracking-tight texto-dourado">Crypto Coinnex</h1>
+        <h2 class="text-3xl font-black tracking-tight texto-dourado">Crypto Coinnex</h2>
         <p class="text-sm text-yellow-400/80 font-semibold">Exchange Oficial · Powered by Binance Web3</p>
       </div>
     </div>
@@ -173,332 +106,111 @@
       <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm font-bold">✓ VERIFICADO</span>
       <span id="status-wallet" class="status-conectado px-3 py-1 rounded-full text-sm font-bold">● Conectado (Binance Web3)</span>
     </div>
-    <p class="legenda-fundo text-center">
-      ⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>
-    </p>
+    <p class="legenda-fundo text-center">⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong></p>
     <p id="atualizacao" class="text-sm text-yellow-400/60 mt-3">Última atualização: —</p>
   </header>
 
-  <!-- 🌿 DESTAQUE: O FUNDO -->
   <section id="fundo" class="card-verde p-6 mb-6">
     <h2 class="text-xl font-bold texto-verde mb-4 text-center">🌿 Fundo de Desenvolvimento do Projeto Crédito Carbono</h2>
-    <p class="text-center text-lg text-green-200 mb-4">
-      Preservação Ambiental + Valorização Financeira
-    </p>
-    <p class="text-sm text-green-100/90 leading-relaxed mb-5 text-center">
-      Titular da propriedade e garantidor de todos os ativos da Crypto Coinnex. 
-      Destina recursos para projetos de reflorestamento, conservação ambiental, 
-      logística sustentável e geração de créditos de carbono certificados.
-    </p>
+    <p class="text-center text-lg text-green-200 mb-4">Preservação Ambiental + Valorização Financeira</p>
+    <p class="text-sm text-green-100/90 leading-relaxed mb-5 text-center">Titular da propriedade e garantidor de todos os ativos da Crypto Coinnex. Destina recursos para projetos de reflorestamento, conservação ambiental, logística sustentável e geração de créditos de carbono certificados.</p>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-      <div>
-        <p class="text-2xl font-black texto-verde">50.000</p>
-        <p class="text-xs text-green-300/70">Árvores Protegidas</p>
-      </div>
-      <div>
-        <p class="text-2xl font-black texto-verde">20.000</p>
-        <p class="text-xs text-green-300/70">Hectares de Floresta</p>
-      </div>
-      <div>
-        <p class="text-2xl font-black texto-dourado">36.000</p>
-        <p class="text-xs text-yellow-300/70">BTC em Reserva</p>
-      </div>
-      <div>
-        <p class="text-2xl font-black verde-usdt">35M</p>
-        <p class="text-xs text-green-300/70">USDT em Garantia</p>
-      </div>
+      <div><p class="text-2xl font-black texto-verde">50.000</p><p class="text-xs text-green-300/70">Árvores Protegidas</p></div>
+      <div><p class="text-2xl font-black texto-verde">20.000</p><p class="text-xs text-green-300/70">Hectares de Floresta</p></div>
+      <div><p class="text-2xl font-black texto-dourado">36.000</p><p class="text-xs text-yellow-300/70">BTC em Reserva</p></div>
+      <div><p class="text-2xl font-black verde-usdt">35M</p><p class="text-xs text-green-300/70">USDT em Garantia</p></div>
     </div>
   </section>
 
-  <!-- 💰 DESTINAÇÃO DOS RECURSOS -->
   <section id="recursos" class="card p-6 mb-6">
     <h2 class="text-lg font-bold texto-dourado mb-5">📋 Para Onde Vão os Recursos</h2>
-    <p class="text-sm text-yellow-200/80 mb-4">
-      <strong>75% de todos os valores e fundos garantidores</strong> são destinados conforme abaixo:
-    </p>
+    <p class="text-sm text-yellow-200/80 mb-4"><strong>75% de todos os valores e fundos garantidores</strong> são destinados conforme abaixo:</p>
     <div class="space-y-4">
-      <div>
-        <div class="flex justify-between text-sm mb-1">
-          <span class="text-green-400 font-bold">🌳 Crédito de Carbono</span>
-          <span class="text-green-300">45%</span>
-        </div>
-        <div class="barra"><span style="width:45%;background:linear-gradient(90deg,#22c55e,#4ade80)"></span></div>
-        <p class="text-xs text-yellow-200/60 mt-1">Reflorestamento, conservação, geração de créditos certificados</p>
-      </div>
-      <div>
-        <div class="flex justify-between text-sm mb-1">
-          <span class="text-yellow-400 font-bold">🚛 Cargo Crédito</span>
-          <span class="text-yellow-300">20%</span>
-        </div>
-        <div class="barra"><span style="width:20%;background:linear-gradient(90deg,#facc15,#fbbf24)"></span></div>
-        <p class="text-xs text-yellow-200/60 mt-1">Logística, produção sustentável e cadeia de suprimento verde</p>
-      </div>
-      <div>
-        <div class="flex justify-between text-sm mb-1">
-          <span class="text-blue-400 font-bold">🛡️ Reserva Garantidora</span>
-          <span class="text-blue-300">10%</span>
-        </div>
-        <div class="barra"><span style="width:10%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></span></div>
-        <p class="text-xs text-yellow-200/60 mt-1">Segurança e liquidez dos ativos</p>
-      </div>
-      <div class="border-t border-yellow-700/30 pt-3 mt-3">
-        <div class="flex justify-between text-sm mb-1">
-          <span class="text-gray-400 font-bold">📊 Disponível / Operação</span>
-          <span class="text-gray-300">25%</span>
-        </div>
-        <div class="barra"><span style="width:25%;background:linear-gradient(90deg,#6b7280,#9ca3af)"></span></div>
-        <p class="text-xs text-yellow-200/60 mt-1">Desenvolvimento e manutenção da plataforma</p>
-      </div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-green-400 font-bold">🌳 Crédito de Carbono</span><span class="text-green-300">45%</span></div><div class="barra"><span style="width:45%;background:linear-gradient(90deg,#22c55e,#4ade80)"></span></div><p class="text-xs text-yellow-200/60 mt-1">Reflorestamento, conservação, geração de créditos certificados</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-yellow-400 font-bold">🚛 Cargo Crédito</span><span class="text-yellow-300">20%</span></div><div class="barra"><span style="width:20%;background:linear-gradient(90deg,#facc15,#fbbf24)"></span></div><p class="text-xs text-yellow-200/60 mt-1">Logística, produção sustentável e cadeia de suprimento verde</p></div>
+      <div><div class="flex justify-between text-sm mb-1"><span class="text-blue-400 font-bold">🛡️ Reserva Garantidora</span><span class="text-blue-300">10%</span></div><div class="barra"><span style="width:10%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></span></div><p class="text-xs text-yellow-200/60 mt-1">Segurança e liquidez dos ativos</p></div>
+      <div class="border-t border-yellow-700/30 pt-3 mt-3"><div class="flex justify-between text-sm mb-1"><span class="text-gray-400 font-bold">📊 Disponível / Operação</span><span class="text-gray-300">25%</span></div><div class="barra"><span style="width:25%;background:linear-gradient(90deg,#6b7280,#9ca3af)"></span></div><p class="text-xs text-yellow-200/60 mt-1">Desenvolvimento e manutenção da plataforma</p></div>
     </div>
   </section>
 
-  <!-- 👥 EQUIPE -->
   <section class="card p-5 mb-6">
     <h2 class="text-lg font-bold texto-dourado mb-4">👥 Gestão</h2>
-    <div>
-      <p class="font-black text-gray-300 text-lg mb-1">🎖️ Floyd Menezes</p>
-      <p class="text-sm text-yellow-100/90 leading-relaxed">
-        Diretor da Companhia e Criador da Ethereum Brasil. Liderança estratégica e desenvolvimento de projetos inovadores no setor blockchain.
-      </p>
-    </div>
+    <p class="font-black text-gray-300 text-lg mb-1">🎖️ Floyd Menezes</p>
+    <p class="text-sm text-yellow-100/90 leading-relaxed">Diretor da Companhia e Criador da Ethereum Brasil. Liderança estratégica e desenvolvimento de projetos inovadores no setor blockchain.</p>
   </section>
 
-  <!-- 📊 ATIVOS -->
   <section id="ativos">
-    <!-- CARTEIRA PRINCIPAL - BTC -->
     <div class="card-dourado p-5 mb-5">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-yellow-300 flex items-center gap-2">💰 Carteira Principal</h2>
-        <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full font-bold">BITCOIN</span>
-      </div>
+      <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-yellow-300">💰 Carteira Principal</h2><span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full font-bold">BITCOIN</span></div>
       <p class="text-xs text-yellow-400/60 mb-1">Endereço BTC / EVM</p>
-      <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-600/40">
-        <span class="address flex-1 px-2 py-1 rounded" id="addr1">0x26EF6c3AF50240F211E774213914f8DB526fA77d</span>
-        <button class="copy-btn" onclick="copiar('addr1')">📋</button>
-        <a href="https://etherscan.io/address/0x26EF6c3AF50240F211E774213914f8DB526fA77d" target="_blank" class="text-xs text-yellow-400 hover:text-yellow-200">🔗 Verificar</a>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <p class="text-xs text-yellow-400/60">Saldo BTC</p>
-          <p class="text-3xl font-black texto-dourado">36.00000000</p>
-        </div>
-        <div>
-          <p class="text-xs text-yellow-400/60">Valor Total (USD)</p>
-          <p class="text-2xl font-bold text-yellow-300">$ 2,520,000.00</p>
-        </div>
-      </div>
+      <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-600/40"><span class="address flex-1 px-2 py-1 rounded" id="addr1">0x26EF6c3AF50240F211E774213914f8DB526fA77d</span><button class="copy-btn" onclick="copiar('addr1')">📋</button><a href="https://etherscan.io/address/0x26EF6c3AF50240F211E774213914f8DB526fA77d" target="_blank" class="text-xs text-yellow-400 hover:text-yellow-200">🔗 Verificar</a></div>
+      <div class="grid grid-cols-2 gap-4"><div><p class="text-xs text-yellow-400/60">Saldo BTC</p><p class="text-3xl font-black texto-dourado">36.00000000</p></div><div><p class="text-xs text-yellow-400/60">Valor Total (USD)</p><p class="text-2xl font-bold text-yellow-300">$ 2,520,000.00</p></div></div>
     </div>
 
-    <!-- CARTEIRA SECUNDÁRIA - USDT -->
     <div class="card p-5 mb-5">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-lg font-bold text-yellow-400/90 flex items-center gap-2">💼 Carteira Secundária (EVM)</h2>
-        <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-semibold">USDT / EVM</span>
-      </div>
+      <div class="flex justify-between items-center mb-4"><h2 class="text-lg font-bold text-yellow-400/90">💼 Carteira Secundária (EVM)</h2><span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-semibold">USDT / EVM</span></div>
       <p class="text-xs text-yellow-400/50 mb-1">Endereço EVM (Binance Web3)</p>
-      <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-700/30">
-        <span class="address flex-1 px-2 py-1 rounded" id="addr2">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</span>
-        <button class="copy-btn" onclick="copiar('addr2')">📋</button>
-        <a href="https://etherscan.io/address/0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655" target="_blank" class="text-xs text-yellow-400 hover:text-yellow-200">🔗 Verificar</a>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <p class="text-xs text-yellow-400/50">Saldo USDT</p>
-          <p class="text-xl font-bold verde-usdt">35,000,000.00</p>
-        </div>
-        <div>
-          <p class="text-xs text-yellow-400/50">Valor Total</p>
-          <p class="text-xl font-bold texto-dourado">$ 35,000,000.00</p>
-        </div>
-      </div>
+      <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-700/30"><span class="address flex-1 px-2 py-1 rounded" id="addr2">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</span><button class="copy-btn" onclick="copiar('addr2')">📋</button><a href="https://etherscan.io/address/0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655" target="_blank" class="text-xs text-yellow-400 hover:text-yellow-200">🔗 Verificar</a></div>
+      <div class="grid grid-cols-2 gap-4"><div><p class="text-xs text-yellow-400/50">Saldo USDT</p><p class="text-xl font-bold verde-usdt">35,000,000.00</p></div><div><p class="text-xs text-yellow-400/50">Valor Total</p><p class="text-xl font-bold texto-dourado">$ 35,000,000.00</p></div></div>
     </div>
 
-    <!-- TOKEN HCHAIN -->
     <div class="card-verde p-5 mb-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-lg font-bold texto-verde flex items-center gap-2">🪙 Token HChain</h2>
-        <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-bold">HCH</span>
-      </div>
-      <p class="text-xs text-green-300/70 mb-2">1 HCH = 1 tonelada de CO₂ neutralizada 🌍</p>
-      <p class="text-xs text-yellow-400/50 mb-1">Contrato Oficial</p>
-      <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-green-700/30">
-        <span class="address flex-1 px-2 py-1 rounded" id="addr-token">0x8888888888888888888888888888888888HCHAIN</span>
-        <button class="copy-btn" onclick="copiar('addr-token')">📋</button>
-      </div>
-      <div class="grid grid-cols-3 gap-3 mb-3">
-        <div>
-          <p class="text-xs text-green-300/70">Símbolo</p>
-          <p class="font-bold texto-verde">HCH</p>
-        </div>
-        <div>
-          <p class="text-xs text-green-300/70">Supply Total</p>
-          <p class="font-bold text-green-300">100 Milhões</p>
-        </div>
-        <div>
-          <p class="text-xs text-green-300/70">Preço / Crédito</p>
-          <p class="font-bold texto-dourado">$ 1.00</p>
-        </div>
-      </div>
+      <div class="flex justify-between items-center mb-4"><h2 class="text-lg font-bold texto-verde">🪙 Token HChain</h2><span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full font-bold">HCH</span></div>
+      <p class="text-xs text-green-300/70 mb-2">1 HCH = 1 tonelada de CO₂ neutralizada 🌍</p><p class="text-xs text-yellow-400/50 mb-1">Contrato Oficial</p>
+      <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-green-700/30"><span class="address flex-1 px-2 py-1 rounded" id="addr-token">0x8888888888888888888888888888888888HCHAIN</span><button class="copy-btn" onclick="copiar('addr-token')">📋</button></div>
+      <div class="grid grid-cols-3 gap-3 mb-3"><div><p class="text-xs text-green-300/70">Símbolo</p><p class="font-bold texto-verde">HCH</p></div><div><p class="text-xs text-green-300/70">Supply Total</p><p class="font-bold text-green-300">100 Milhões</p></div><div><p class="text-xs text-green-300/70">Preço / Crédito</p><p class="font-bold texto-dourado">$ 1.00</p></div></div>
     </div>
   </section>
 
-  <!-- 📈 GRÁFICO BITCOIN -->
   <section id="projetos">
-    <div class="flex gap-3 mb-4 justify-center">
-      <button class="btn px-3 py-1.5 text-sm active" onclick="carregarGrafico(7)">7 Dias</button>
-      <button class="btn px-3 py-1.5 text-sm" onclick="carregarGrafico(30)">30 Dias</button>
-      <button class="btn px-3 py-1.5 text-sm" onclick="carregarGrafico(90)">90 Dias</button>
-    </div>
-
+    <div class="flex gap-3 mb-4 justify-center"><button class="btn px-3 py-1.5 text-sm active" onclick="carregarGrafico(7,this)">7 Dias</button><button class="btn px-3 py-1.5 text-sm" onclick="carregarGrafico(30,this)">30 Dias</button><button class="btn px-3 py-1.5 text-sm" onclick="carregarGrafico(90,this)">90 Dias</button></div>
     <div class="card p-5 mb-6">
-      <p class="text-sm text-yellow-400/60 mb-1">Bitcoin (BTC)</p>
-      <p class="text-3xl font-black texto-dourado" id="preco-btc">$ 70,000.00</p>
-      <p id="variacao" class="text-sm mt-2 mb-4" style="color:#90ee90">+2.35% nos últimos 30 dias</p>
-      <canvas id="grafico-btc" height="250"></canvas>
+      <p class="text-sm text-yellow-400/60 mb-1">Bitcoin (BTC)</p><p class="text-3xl font-black texto-dourado" id="preco-btc">$ 70,000.00</p><p id="variacao" class="text-sm mt-2 mb-4">+2.35% nos últimos 30 dias</p><canvas id="grafico-btc" height="250"></canvas>
     </div>
-
-    <!-- 🌳 PROJETOS APOIADOS -->
     <div class="card-verde p-6 mb-6">
-      <h2 class="text-lg font-bold texto-verde mb-4 text-center">🌳 Projetos Apoiados</h2>
-      <p class="text-sm text-green-200/80 text-center mb-5">Cada HCH emitido financia a proteção de áreas preservadas</p>
+      <h2 class="text-lg font-bold texto-verde mb-4 text-center">🌳 Projetos Apoiados</h2><p class="text-sm text-green-200/80 text-center mb-5">Cada HCH emitido financia a proteção de áreas preservadas</p>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30">
-          <h3 class="font-bold text-green-300 mb-2">🌤️ Floresta Amazônica</h3>
-          <p class="text-xs text-green-200/70">Proteção de reservas e comunidades locais</p>
-        </div>
-        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30">
-          <h3 class="font-bold text-green-300 mb-2">🌿 Mata Atlântica</h3>
-          <p class="text-xs text-green-200/70">Reflorestamento e recuperação de bioma</p>
-        </div>
-        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30">
-          <h3 class="font-bold text-green-300 mb-2">♻️ Energia Limpa</h3>
-          <p class="text-xs text-green-200/70">Projetos de energia renovável certificada</p>
-        </div>
-        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30">
-          <h3 class="font-bold text-green-300 mb-2">🚛 Logística Verde</h3>
-          <p class="text-xs text-green-200/70">Redução de emissões na cadeia produtiva</p>
-        </div>
+        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30"><h3 class="font-bold text-green-300 mb-2">🌤️ Floresta Amazônica</h3><p class="text-xs text-green-200/70">Proteção de reservas e comunidades locais</p></div>
+        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30"><h3 class="font-bold text-green-300 mb-2">🌿 Mata Atlântica</h3><p class="text-xs text-green-200/70">Reflorestamento e recuperação de bioma</p></div>
+        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30"><h3 class="font-bold text-green-300 mb-2">♻️ Energia Limpa</h3><p class="text-xs text-green-200/70">Projetos de energia renovável certificada</p></div>
+        <div class="p-4 rounded-lg bg-green-900/30 border border-green-700/30"><h3 class="font-bold text-green-300 mb-2">🚛 Logística Verde</h3><p class="text-xs text-green-200/70">Redução de emissões na cadeia produtiva</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 📋 OBSERVAÇÃO OFICIAL -->
-  <div class="card-dourado p-5 mb-6">
-    <h2 class="text-lg font-bold texto-dourado mb-3">📋 Observação Oficial da Companhia</h2>
-    <p class="text-base text-yellow-100 leading-relaxed">
-      <strong class="text-yellow-300">75% de todos os valores e fundos garantidores</strong> serão destinados a garantir o projeto <strong class="texto-dourado">Cargo Crédito</strong> e <strong class="texto-dourado">Crédito de Carbono</strong>, através do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>.
-    </p>
-  </div>
+  <div class="card-dourado p-5 mb-6"><h2 class="text-lg font-bold texto-dourado mb-3">📋 Observação Oficial da Companhia</h2><p class="text-base text-yellow-100 leading-relaxed"><strong class="text-yellow-300">75% de todos os valores e fundos garantidores</strong> serão destinados a garantir o projeto <strong class="texto-dourado">Cargo Crédito</strong> e <strong class="texto-dourado">Crédito de Carbono</strong>, através do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>.</p></div>
 
-  <!-- 🔗 COMPARTILHAR -->
-  <div class="card p-5 mb-6 text-center">
-    <h3 class="font-bold text-yellow-300 mb-3">🔗 Compartilhar</h3>
-    <p class="text-xs text-yellow-200/60 mb-3">Ajude a espalhar o projeto</p>
-    <div class="flex justify-center gap-3 flex-wrap">
-      <button class="btn px-4 py-2 text-sm" onclick="compartilhar()">📤 Copiar Link</button>
-    </div>
-  </div>
+  <div class="card p-5 mb-6 text-center"><h3 class="font-bold text-yellow-300 mb-3">🔗 Compartilhar</h3><p class="text-xs text-yellow-200/60 mb-3">Ajude a espalhar o projeto</p><button class="btn px-4 py-2 text-sm" onclick="compartilhar()">📤 Copiar Link</button></div>
 
-  <!-- RODAPÉ -->
   <footer class="text-center mt-10 pb-6">
     <div class="card p-5">
-      <p class="text-2xl font-black texto-dourado">Crypto Coinnex</p>
-      <p class="text-yellow-400/80 mt-1">Exchange Oficial · Powered by Binance Web3 Wallet</p>
-      <p class="text-xs text-yellow-400/50 mt-3">© 2026 Crypto Coinnex · Todos os direitos reservados</p>
-      
-      <div class="mt-5 space-y-3">
-        <p class="text-xl font-black texto-dourado">⚖️ Fundo de Desenvolvimento do Projeto Crédito Carbono</p>
-        <p class="legenda-fundo">
-          ⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong>
-        </p>
-        <p class="text-sm text-yellow-100/80">Titular e Garantidor dos Ativos</p>
-        <p class="text-lg font-bold text-gray-300 mt-3">🎖️ Floyd Menezes — Diretor da Companhia</p>
-        <p class="text-sm text-yellow-100/80">Criador da Ethereum Brasil</p>
-      </div>
-
-      <div class="mt-5 p-3 rounded-lg border border-yellow-600/40 bg-yellow-900/20">
-        <p class="text-xs text-yellow-300 font-bold mb-1">📋 Observação Oficial</p>
-        <p class="text-xs text-yellow-100/90">75% de todos os valores e fundos garantidores serão destinados a garantir o projeto Cargo Crédito e Crédito de Carbono, através do Fundo de Desenvolvimento do Projeto Crédito Carbono.</p>
-      </div>
+      <p class="text-2xl font-black texto-dourado">Crypto Coinnex</p><p class="text-yellow-400/80 mt-1">Exchange Oficial · Powered by Binance Web3 Wallet</p><p class="text-xs text-yellow-400/50 mt-3">© 2026 Crypto Coinnex · Todos os direitos reservados</p>
+      <div class="mt-5 space-y-3"><p class="text-xl font-black texto-dourado">⚖️ Fundo de Desenvolvimento do Projeto Crédito Carbono</p><p class="legenda-fundo">⚖️ A propriedade é do <strong>Fundo de Desenvolvimento do Projeto Crédito Carbono</strong></p><p class="text-sm text-yellow-100/80">Titular e Garantidor dos Ativos</p><p class="text-lg font-bold text-gray-300 mt-3">🎖️ Floyd Menezes — Diretor da Companhia</p><p class="text-sm text-yellow-100/80">Criador da Ethereum Brasil</p></div>
+      <div class="mt-5 p-3 rounded-lg border border-yellow-600/40 bg-yellow-900/20"><p class="text-xs text-yellow-300 font-bold mb-1">📋 Observação Oficial</p><p class="text-xs text-yellow-100/90">75% de todos os valores e fundos garantidores serão destinados a garantir o projeto Cargo Crédito e Crédito de Carbono, através do Fundo de Desenvolvimento do Projeto Crédito Carbono.</p></div>
     </div>
   </footer>
 
   <script>
     let graficoBTC;
-    let diasAtual = 30;
-    const corDourado = '#ffd700';
-
-    function copiar(id) {
-      navigator.clipboard.writeText(document.getElementById(id).textContent)
-        .then(() => alert('Copiado! ✅'));
+    const corDourado='#ffd700';
+    function copiar(id){navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert('Copiado! ✅'))}
+    function compartilhar(){navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copiado! ✅'))}
+    function gerarDadosBTC(dias){
+      const dados=[],labels=[];let precoBase=70000;
+      for(let i=dias;i>=0;i--){const data=new Date();data.setDate(data.getDate()-i);labels.push(`${data.getDate()}/${data.getMonth()+1}`);const variacao=(Math.sin(i/5)*2000)+(Math.random()-.5)*3000;dados.push(precoBase+variacao)}
+      return{labels,dados}
     }
-
-    function compartilhar() {
-      navigator.clipboard.writeText(window.location.href)
-        .then(() => alert('Link copiado! ✅'));
+    function carregarGrafico(dias,botao){
+      document.querySelectorAll('.flex.gap-3.mb-4.justify-center .btn').forEach(b=>b.classList.remove('active'));
+      if(botao)botao.classList.add('active');
+      const{labels,dados}=gerarDadosBTC(dias),precoAtual=dados[dados.length-1],precoInicial=dados[0];
+      const variacaoPct=((precoAtual-precoInicial)/precoInicial*100).toFixed(2),sinal=variacaoPct>=0?'+':'',corVar=variacaoPct>=0?'#90ee90':'#ff6b6b';
+      document.getElementById('preco-btc').textContent=`$ ${precoAtual.toLocaleString('en-US',{minimumFractionDigits:2})}`;
+      document.getElementById('variacao').innerHTML=`<span style="color:${corVar}">${sinal}${variacaoPct}%</span> nos últimos ${dias} dias`;
+      if(graficoBTC)graficoBTC.destroy();
+      graficoBTC=new Chart(document.getElementById('grafico-btc').getContext('2d'),{type:'line',data:{labels,datasets:[{label:'BTC/USD',data:dados,borderColor:corDourado,backgroundColor:'rgba(255,215,0,.15)',fill:true,tension:.4,pointRadius:0,borderWidth:3}]},options:{responsive:true,plugins:{legend:{labels:{color:'#ffd700'}}},scales:{x:{grid:{color:'#3d3400'},ticks:{color:'#ffd700'}},y:{grid:{color:'#3d3400'},ticks:{color:'#ffd700'}}}}})
     }
-
-    function gerarDadosBTC(dias) {
-      const dados = [];
-      const labels = [];
-      let precoBase = 70000;
-      for (let i = dias; i >= 0; i--) {
-        const data = new Date();
-        data.setDate(data.getDate() - i);
-        labels.push(`${data.getDate()}/${data.getMonth()+1}`);
-        const variacao = (Math.sin(i / 5) * 2000) + (Math.random() - 0.5) * 3000;
-        dados.push(precoBase + variacao);
-      }
-      return { labels, dados };
-    }
-
-    function carregarGrafico(dias) {
-      diasAtual = dias;
-      document.querySelectorAll('.flex.gap-3.mb-4.justify-center .btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
-
-      const { labels, dados } = gerarDadosBTC(dias);
-      const precoAtual = dados[dados.length - 1];
-      const precoInicial = dados[0];
-      const variacaoPct = ((precoAtual - precoInicial) / precoInicial * 100).toFixed(2);
-      const sinal = variacaoPct >= 0 ? '+' : '';
-      const corVar = variacaoPct >= 0 ? '#90ee90' : '#ff6b6b';
-
-      document.getElementById('preco-btc').textContent = `$ ${precoAtual.toLocaleString('en-US', {minimumFractionDigits:2})}`;
-      document.getElementById('variacao').innerHTML = `<span style="color:${corVar}">${sinal}${variacaoPct}%</span> nos últimos ${dias} dias`;
-
-      if (graficoBTC) graficoBTC.destroy();
-      graficoBTC = new Chart(document.getElementById('grafico-btc').getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'BTC/USD',
-            data: dados,
-            borderColor: corDourado,
-            backgroundColor: 'rgba(255,215,0,0.15)',
-            fill: true,
-            tension: 0.4,
-            pointRadius: 0,
-            borderWidth: 3
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { labels: { color: '#ffd700' } } },
-          scales: {
-            x: { grid: { color: '#3d3400' }, ticks: { color: '#ffd700' } },
-            y: { grid: { color: '#3d3400' }, ticks: { color: '#ffd700' } }
-          }
-        }
-      });
-    }
-
-    window.addEventListener('load', () => {
-      document.getElementById('atualizacao').textContent = 
-        `Última atualização: ${new Date().toLocaleTimeString('pt-BR')}`;
-      carregarGrafico(30);
-    });
+    window.addEventListener('load',()=>{document.getElementById('atualizacao').textContent=`Última atualização: ${new Date().toLocaleTimeString('pt-BR')}`;carregarGrafico(30,document.querySelectorAll('.flex.gap-3.mb-4.justify-center .btn')[1])});
   </script>
 </body>
 </html>
