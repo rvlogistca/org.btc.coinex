@@ -1,469 +1,1020 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto Coinnex · Eliel Lara · Binance Web3</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-    * { font-family: 'Inter', sans-serif; }
-    :root {
-      --ouro: #ffd700;
-      --ouro-escuro: #b8860b;
-      --fundo: #0a0800;
-      --card: #1a1500;
-    }
-    body {
-      background: var(--fundo);
-      color: #fff;
-      min-height: 100vh;
-      background-image:
-        radial-gradient(circle at top, rgba(255,215,0,0.12), transparent 50%),
-        radial-gradient(circle at bottom, rgba(255,184,0,0.08), transparent 50%);
-    }
-    .card {
-      background: var(--card);
-      border-radius: 16px;
-      border: 2px solid var(--ouro-escuro);
-      box-shadow: 0 0 20px rgba(255,215,0,0.15);
-    }
-    .card-dourado {
-      background: linear-gradient(135deg, #2b2200, #1a1500);
-      border: 2px solid var(--ouro);
-      box-shadow: 0 0 35px rgba(255,215,0,0.25);
-      animation: brilho 3s infinite alternate;
-    }
-    @keyframes brilho {
-      from { box-shadow: 0 0 35px rgba(255,215,0,0.25); }
-      to { box-shadow: 0 0 45px rgba(255,215,0,0.35); }
-    }
-    .texto-dourado {
-      background: linear-gradient(135deg, #ffd700, #ffec80, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-    }
-    .badge-dono {
-      background: linear-gradient(135deg, #ffd700, #ffb800);
-      color: #000;
-      font-weight: 900;
-      box-shadow: 0 0 15px rgba(255,215,0,0.4);
-    }
-    .badge-diretor {
-      background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
-      color: #000;
-      font-weight: 900;
-      box-shadow: 0 0 15px rgba(192,192,192,0.4);
-    }
-    .address {
-      font-family: 'Courier New', monospace;
-      font-size: 0.8rem;
-      color: #ffd700;
-      background: rgba(255,215,0,0.08);
-      word-break: break-all;
-    }
-    .copy-btn { cursor: pointer; transition: transform 0.2s; color: #ffd700; }
-    .copy-btn:hover { transform: scale(1.2); }
-    .btn {
-      background: #2b2200;
-      color: #ffd700;
-      font-weight: 700;
-      border-radius: 10px;
-      border: 2px solid #b8860b;
-      transition: all 0.3s;
-    }
-    .btn:hover, .btn.active {
-      background: linear-gradient(135deg, #ffd700, #ffb800);
-      color: #000;
-      border-color: #ffd700;
-      box-shadow: 0 0 15px rgba(255,215,0,0.5);
-    }
-    .btn-binance {
-      background: linear-gradient(135deg, #F0B90B, #F8D12F);
-      color: #000;
-      font-weight: 900;
-      border: none;
-      box-shadow: 0 0 20px rgba(240,185,11,0.5);
-    }
-    .btn-binance:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px rgba(240,185,11,0.7);
-    }
-    .status-conectado {
-      background: rgba(0,255,100,0.15);
-      color: #00ff64;
-      border: 1px solid #00ff64;
-    }
-    .status-desconectado {
-      background: rgba(255,80,80,0.15);
-      color: #ff5050;
-      border: 1px solid #ff5050;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#06060c">
+    <title>USTD — Em Manutenção</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #06060c, #0f2e1a);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* === TÍTULO PRINCIPAL === */
+        .titulo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* === CÓDIGO DE CONFIGURAÇÃO === */
+        .code-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #22c55e;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            max-width: 500px;
+            width: 100%;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #90ee90;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        /* === REDE ETHEREUM === */
+        .eth-info {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin: 15px 0 30px;
+        }
+
+        /* === ASSINATURA ESTILO HUMANO === */
+        .assinatura {
+            margin-top: 40px;
+        }
+        .assinatura .linha1 {
+            font-size: 1.3rem;
+            color: #fff;
+            font-style: italic;
+        }
+        .assinatura .nome {
+            font-size: 2rem;
+            color: #ffd700;
+            font-family: 'Brush Script MT', 'Segoe Script', cursive;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+        .assinatura .risco {
+            width: 220px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            margin: 10px auto 0;
+        }
+
+        /* === ANIMAÇÃO === */
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+    </style>
 </head>
-<body class="px-4 py-6 max-w-4xl mx-auto">
+<body>
 
-  <header class="text-center mb-8">
-    <div class="inline-flex items-center gap-3 mb-3">
-      <div class="w-14 h-14 rounded-full flex items-center justify-center text-2xl font-black" style="background:linear-gradient(135deg,#ffd700,#ffb800);color:#000">C</div>
-      <div class="text-left">
-        <h1 class="text-3xl font-black tracking-tight texto-dourado">Crypto Coinnex</h1>
-        <p class="text-sm text-yellow-400/80 font-semibold">Exchange Oficial · Powered by Binance Web3</p>
-      </div>
-    </div>
-    <div class="flex justify-center gap-3 mb-3 flex-wrap">
-      <span class="badge-dono px-5 py-2 rounded-full text-sm">👑 Proprietário: Eliel Lara</span>
-      <span class="badge-diretor px-5 py-2 rounded-full text-sm">🎖️ Diretor: Floyd Menezes</span>
-      <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full text-sm font-bold">✓ VERIFICADO</span>
-      <span id="status-wallet" class="status-desconectado px-3 py-1 rounded-full text-sm font-bold">● Desconectado</span>
-    </div>
-    <p id="atualizacao" class="text-sm text-yellow-400/60">Última atualização: —</p>
-  </header>
+    <h1 class="titulo pulse">🔧 USTD em MANUTENÇÃO</h1>
 
-  <!-- SOBRE A EQUIPE -->
-  <div class="card p-5 mb-5">
-    <h2 class="text-lg font-bold texto-dourado mb-4">👥 Sobre a Equipe</h2>
-    
-    <div class="mb-5">
-      <p class="font-black text-yellow-300 text-lg mb-1">👑 Eliel Lara</p>
-      <p class="text-sm text-yellow-100/90 leading-relaxed">
-        Proprietário e Desenvolvedor da Crypto Coinnex. Especialista em criação de plataformas e softwares, responsável pelo desenvolvimento técnico de múltiplos sistemas e pela fundação desta companhia.
-      </p>
+    <div class="code-box">
+<span>// CONFIGURAÇÃO DO TOKEN</span><br>
+<span>CONTRATO: 0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</span><br>
+<span>REDE: Ethereum Mainnet</span><br>
+<span>PADRÃO: ERC-20</span><br>
+<span>DECIMAIS: 18</span><br>
+<span>SÍMBOLO: USTD</span><br>
+<span>STATUS: Atualizando dados on-chain...</span><br>
+<span>AGUARDE — Em breve disponível</span>
     </div>
 
-    <div>
-      <p class="font-black text-gray-300 text-lg mb-1">🎖️ Floyd Menezes</p>
-      <p class="text-sm text-yellow-100/90 leading-relaxed">
-        Diretor da Companhia e Criador da Ethereum Brasil. Atua na liderança estratégica e no desenvolvimento de projetos inovadores no setor blockchain.
-      </p>
-    </div>
-  </div>
-
-  <!-- OBSERVAÇÃO OFICIAL -->
-  <div class="card-dourado p-5 mb-5">
-    <h2 class="text-lg font-bold texto-dourado mb-3">📋 Observação Oficial da Companhia</h2>
-    <p class="text-base text-yellow-100 leading-relaxed">
-      <strong class="text-yellow-300">75% de todos os valores e fundos garantidores</strong> serão destinados a garantir o projeto <strong class="texto-dourado">Cargo Crédito</strong> e <strong class="texto-dourado">Crédito de Carbono</strong>.
+    <p class="eth-info">
+        ✨ Desenvolvido pela rede <strong style="color: #627eea;">Ethereum</strong>
     </p>
-  </div>
 
-  <!-- BOTÃO CONECTAR BINANCE WEB3 -->
-  <div class="text-center mb-6">
-    <button id="btn-conectar" onclick="conectarBinanceWeb3()" class="btn-binance px-8 py-3 rounded-xl text-lg">
-      🟡 Conectar Binance Web3 Wallet
-    </button>
-    <p id="endereco-conectado" class="mt-3 text-sm text-yellow-300 hidden"></p>
-  </div>
-
-  <!-- CARTEIRA PRINCIPAL -->
-  <div class="card-dourado p-5 mb-5">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold text-yellow-300 flex items-center gap-2">💰 Carteira Principal</h2>
-      <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full font-bold">BITCOIN</span>
+    <div class="assinatura">
+        <p class="linha1">programador</p>
+        <h2 class="nome">Eliel Lara</h2>
+        <div class="risco"></div>
     </div>
-    <p class="text-xs text-yellow-400/60 mb-1">Endereço BTC (Binance Web3)</p>
-    <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-600/40">
-      <span class="address flex-1 px-2 py-1 rounded" id="addr1">0x26EF6c3AF50240F211E774213914f8DB526fA77d</span>
-      <button class="copy-btn" onclick="copiar('addr1')">📋</button>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <p class="text-xs text-yellow-400/60">Saldo BTC</p>
-        <p class="text-3xl font-black texto-dourado" id="saldo-btc">36.00000000</p>
-      </div>
-      <div>
-        <p class="text-xs text-yellow-400/60">Valor Total (USD)</p>
-        <p class="text-2xl font-bold text-yellow-300" id="valor-btc">—</p>
-      </div>
-    </div>
-  </div>
 
-  <!-- CARTEIRA SECUNDÁRIA -->
-  <div class="card p-5 mb-5">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-bold text-yellow-400/90 flex items-center gap-2">💼 Carteira Secundária (EVM)</h2>
-      <span class="bg-yellow-500/10 text-yellow-400/80 px-3 py-1 rounded-full font-semibold">HCH / EVM</span>
-    </div>
-    <p class="text-xs text-yellow-400/50 mb-1">Endereço EVM (Binance Web3)</p>
-    <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-700/30">
-      <span class="address flex-1 px-2 py-1 rounded" id="addr2">0x4644E1113FE1a6bA831D85cc4772b3D0c2DE6555</span>
-      <button class="copy-btn" onclick="copiar('addr2')">📋</button>
-    </div>
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <p class="text-xs text-yellow-400/50">Saldo HCH</p>
-        <p class="text-xl font-bold text-yellow-300" id="saldo-hch">0.00</p>
-      </div>
-      <div>
-        <p class="text-xs text-yellow-400/50">Valor (USD)</p>
-        <p class="text-xl font-bold text-yellow-300" id="valor-hch">$ 0.00</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOKEN HCHAIN -->
-  <div class="card p-5 mb-6">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-lg font-bold texto-dourado flex items-center gap-2">🪙 Token HChain</h2>
-      <span class="bg-yellow-500/20 text-yellow-300 px-3 py-1 rounded-full font-bold">HCH</span>
-    </div>
-    <p class="text-xs text-yellow-400/50 mb-1">Contrato Oficial</p>
-    <div class="flex items-center gap-2 mb-4 p-2 rounded-lg border border-yellow-700/30">
-      <span class="address flex-1 px-2 py-1 rounded" id="addr-token">0x8888888888888888888888888888888888HCHAIN</span>
-      <button class="copy-btn" onclick="copiar('addr-token')">📋</button>
-    </div>
-    <div class="grid grid-cols-3 gap-3 mb-3">
-      <div>
-        <p class="text-xs text-yellow-400/50">Símbolo</p>
-        <p class="font-bold texto-dourado">HCH</p>
-      </div>
-      <div>
-        <p class="text-xs text-yellow-400/50">Supply Total</p>
-        <p class="font-bold text-yellow-300">100.000.000</p>
-      </div>
-      <div>
-        <p class="text-xs text-yellow-400/50">Preço</p>
-        <p class="font-bold texto-dourado" id="preco-hch">$ 1.00</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="flex flex-wrap gap-3 mb-4 justify-center">
-    <button class="btn active px-5 py-2" onclick="trocarMoeda('bitcoin', 'BTC')">Bitcoin</button>
-    <button class="btn px-5 py-2" onclick="trocarMoeda('ethereum', 'ETH')">Ethereum</button>
-    <button class="btn px-5 py-2" onclick="trocarMoeda('binancecoin', 'BNB')">BNB</button>
-  </div>
-
-  <div class="flex gap-3 mb-4 justify-center">
-    <button class="btn px-3 py-1.5 text-sm" onclick="carregarGrafico(7)">7 Dias</button>
-    <button class="btn px-3 py-1.5 text-sm active" onclick="carregarGrafico(30)">30 Dias</button>
-    <button class="btn px-3 py-1.5 text-sm" onclick="carregarGrafico(90)">90 Dias</button>
-  </div>
-
-  <div class="card p-5 mb-6">
-    <p class="text-sm text-yellow-400/60 mb-1" id="nome-moeda">Bitcoin (BTC)</p>
-    <p class="text-3xl font-black texto-dourado" id="preco">Carregando...</p>
-    <p id="variacao" class="text-sm mt-2 mb-4">—</p>
-    <canvas id="grafico" height="250"></canvas>
-  </div>
-
-  <footer class="text-center mt-10 pb-6">
-    <div class="card p-5">
-      <p class="text-2xl font-black texto-dourado">Crypto Coinnex</p>
-      <p class="text-yellow-400/80 mt-1">Exchange Oficial · Powered by Binance Web3 Wallet</p>
-      <p class="text-xs text-yellow-400/50 mt-3">© 2026 Crypto Coinnex · Todos os direitos reservados</p>
-      
-      <div class="mt-5 space-y-2">
-        <p class="text-xl font-black texto-dourado">👑 Eliel Lara — Proprietário & Desenvolvedor</p>
-        <p class="text-sm text-yellow-100/80">Especialista em plataformas e softwares · Fundador da Crypto Coinnex</p>
-        
-        <p class="text-lg font-bold text-gray-300 mt-3">🎖️ Floyd Menezes — Diretor da Companhia</p>
-        <p class="text-sm text-yellow-100/80">Criador da Ethereum Brasil</p>
-      </div>
-
-      <div class="mt-5 p-3 rounded-lg border border-yellow-600/40 bg-yellow-900/20">
-        <p class="text-xs text-yellow-300 font-bold mb-1">📋 Observação Oficial</p>
-        <p class="text-xs text-yellow-100/90">75% de todos os valores e fundos garantidores serão destinados a garantir o projeto Cargo Crédito e Crédito de Carbono.</p>
-      </div>
-
-      <p class="text-xs text-yellow-400/40 mt-4">Integração oficial: window.binancew3w.ethereum + Bitcoin Provider</p>
-    </div>
-  </footer>
-
-  <script>
-    let grafico;
-    let moedaAtual = 'bitcoin';
-    let siglaAtual = 'BTC';
-    let diasAtual = 30;
-    const corDourado = '#ffd700';
-    const nomes = { 
-      bitcoin: 'Bitcoin (BTC)', 
-      ethereum: 'Ethereum (ETH)',
-      binancecoin: 'BNB (BNB)'
-    };
-
-    let contaConectada = null;
-    let providerEVM = null;
-    let providerBTC = null;
-
-    function copiar(id) {
-      navigator.clipboard.writeText(document.getElementById(id).textContent)
-        .then(() => alert('Copiado! ✅'));
-    }
-
-    async function conectarBinanceWeb3() {
-      try {
-        if (typeof window.binancew3w === 'undefined') {
-          alert('Binance Web3 Wallet não detectada!\n\nAbra este site dentro do aplicativo Binance (aba Web3) ou instale a extensão Binance Wallet.');
-          return;
-        }
-
-        if (window.binancew3w.ethereum) {
-          providerEVM = window.binancew3w.ethereum;
-          
-          const accounts = await providerEVM.request({
-            method: 'eth_requestAccounts'
-          });
-
-          if (accounts && accounts.length > 0) {
-            contaConectada = accounts[0];
-            document.getElementById('addr2').textContent = contaConectada;
-            document.getElementById('endereco-conectado').textContent = `Conectado: \( {contaConectada.slice(0,6)}... \){contaConectada.slice(-4)}`;
-            document.getElementById('endereco-conectado').classList.remove('hidden');
-            
-            document.getElementById('status-wallet').textContent = '● Conectado (Binance Web3)';
-            document.getElementById('status-wallet').className = 'status-conectado px-3 py-1 rounded-full text-sm font-bold';
-            
-            document.getElementById('btn-conectar').textContent = '🟡 Carteira Conectada';
-            document.getElementById('btn-conectar').disabled = true;
-            document.getElementById('btn-conectar').style.opacity = '0.7';
-
-            providerEVM.on('accountsChanged', (accounts) => {
-              if (accounts.length === 0) {
-                location.reload();
-              } else {
-                contaConectada = accounts[0];
-                document.getElementById('addr2').textContent = contaConectada;
-                document.getElementById('endereco-conectado').textContent = `Conectado: \( {contaConectada.slice(0,6)}... \){contaConectada.slice(-4)}`;
-              }
-            });
-
-            providerEVM.on('chainChanged', (chainId) => {
-              console.log('Chain alterada:', chainId);
-            });
-          }
-        }
-
-        if (window.binancew3w.bitcoin) {
-          providerBTC = window.binancew3w.bitcoin;
-          try {
-            const btcAccounts = await providerBTC.requestAccounts();
-            if (btcAccounts && btcAccounts.length > 0) {
-              document.getElementById('addr1').textContent = btcAccounts[0];
-            }
-          } catch (e) {
-            console.log('Bitcoin provider disponível, mas usuário recusou ou erro:', e);
-          }
-        }
-
-        carregarSaldos();
-        alert('Conectado com sucesso à Binance Web3 Wallet! 🟡');
-
-      } catch (error) {
-        console.error('Erro ao conectar Binance Web3:', error);
-        alert('Erro ao conectar: ' + (error.message || error));
-      }
-    }
-
-    async function verificarConexaoExistente() {
-      if (typeof window.binancew3w !== 'undefined' && window.binancew3w.ethereum) {
-        try {
-          const accounts = await window.binancew3w.ethereum.request({ method: 'eth_accounts' });
-          if (accounts && accounts.length > 0) {
-            contaConectada = accounts[0];
-            document.getElementById('addr2').textContent = contaConectada;
-            document.getElementById('endereco-conectado').textContent = `Conectado: \( {contaConectada.slice(0,6)}... \){contaConectada.slice(-4)}`;
-            document.getElementById('endereco-conectado').classList.remove('hidden');
-            document.getElementById('status-wallet').textContent = '● Conectado (Binance Web3)';
-            document.getElementById('status-wallet').className = 'status-conectado px-3 py-1 rounded-full text-sm font-bold';
-            document.getElementById('btn-conectar').textContent = '🟡 Carteira Conectada';
-            document.getElementById('btn-conectar').disabled = true;
-            document.getElementById('btn-conectar').style.opacity = '0.7';
-          }
-        } catch (e) {}
-      }
-    }
-
-    function trocarMoeda(id, sigla) {
-      moedaAtual = id; 
-      siglaAtual = sigla;
-      document.querySelectorAll('.btn').forEach(b => {
-        if (!b.classList.contains('btn-binance')) b.classList.remove('active');
-      });
-      event.target.classList.add('active');
-      carregarGrafico(diasAtual);
-    }
-
-    async function carregarSaldos() {
-      try {
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin&vs_currencies=usd');
-        const dados = await res.json();
-        const precoBTC = dados.bitcoin.usd;
-        const saldoBTC = 36;
-        document.getElementById('valor-btc').textContent = `$ ${(saldoBTC * precoBTC).toLocaleString('en-US', {minimumFractionDigits:2})}`;
-        document.getElementById('atualizacao').textContent = `Última atualização: ${new Date().toLocaleTimeString('pt-BR')}`;
-      } catch (e) { 
-        console.error(e); 
-      }
-    }
-
-    async function carregarGrafico(dias) {
-      diasAtual = dias;
-      const botoesDias = document.querySelectorAll('.flex.gap-3.mb-4.justify-center .btn');
-      botoesDias.forEach(b => b.classList.remove('active'));
-      if (event?.target) event.target.classList.add('active');
-
-      try {
-        const fim = Math.floor(Date.now() / 1000);
-        const inicio = fim - (dias * 86400);
-        const url = `https://api.coingecko.com/api/v3/coins/\( {moedaAtual}/market_chart/range?vs_currency=usd&from= \){inicio}&to=${fim}`;
-        const res = await fetch(url);
-        const json = await res.json();
-        if (!json.prices) throw new Error('Sem dados');
-        
-        const datas = json.prices.map(p => { 
-          const d = new Date(p[0]); 
-          return `\( {d.getDate()}/ \){d.getMonth()+1}`; 
-        });
-        const valores = json.prices.map(p => p[1]);
-        const ultimo = valores[valores.length - 1];
-        const primeiro = valores[0];
-        const variacao = ((ultimo - primeiro) / primeiro * 100).toFixed(2);
-        const sinal = variacao >= 0 ? '+' : '';
-        const corVar = variacao >= 0 ? '#90ee90' : '#ff6b6b';
-        
-        document.getElementById('nome-moeda').textContent = nomes[moedaAtual];
-        document.getElementById('preco').textContent = `$ ${ultimo.toLocaleString('en-US', {minimumFractionDigits:2})}`;
-        document.getElementById('variacao').innerHTML = `<span style="color:\( {corVar}"> \){sinal}${variacao}%</span> nos últimos ${dias} dias`;
-        
-        if (grafico) grafico.destroy();
-        grafico = new Chart(document.getElementById('grafico').getContext('2d'), {
-          type: 'line',
-          data: {
-            labels: datas,
-            datasets: [{
-              label: `${siglaAtual}/USD`,
-              data: valores,
-              borderColor: corDourado,
-              backgroundColor: 'rgba(255,215,0,0.15)',
-              fill: true,
-              tension: 0.4,
-              pointRadius: 0,
-              borderWidth: 3
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: { legend: { labels: { color: '#ffd700' } } },
-            scales: {
-              x: { grid: { color: '#3d3400' }, ticks: { color: '#ffd700' } },
-              y: { grid: { color: '#3d3400' }, ticks: { color: '#ffd700' } }
-            }
-          }
-        });
-      } catch (e) {
-        console.error(e);
-        document.getElementById('preco').textContent = 'Erro ao carregar';
-      }
-    }
-
-    window.addEventListener('load', () => {
-      verificarConexaoExistente();
-      carregarSaldos();
-      carregarGrafico(30);
-    });
-  </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <meta name="theme-color" content="#06060c">
+    <meta
+        name="description"
+        content="USTD — Token digital ERC-20 na rede Ethereum."
+    >
+
+    <title>USTD — Stablecoin</title>
+
+    <link rel="icon" type="image/svg+xml" href="./ustd-icon.svg">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-inner">
+
+            <a href="#" class="logo">
+                <img src="./ustd-icon.svg" alt="USTD">
+                <span>USTD</span>
+            </a>
+
+            <a href="#comprar" class="btn btn-primary">
+                Comprar USTD
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <header class="hero container">
+
+        <div class="badge">
+            Ethereum • ERC-20
+        </div>
+
+        <h1>
+            USTD
+            <br>
+            <span>Digital Token</span>
+        </h1>
+
+        <p>
+            Um token digital desenvolvido para operar na rede Ethereum,
+            com contrato público e informações on-chain para consulta.
+        </p>
+
+        <div class="stats">
+
+            <div class="stat">
+                <strong>18</strong>
+                <span>Decimais</span>
+            </div>
+
+            <div class="stat">
+                <strong>ERC-20</strong>
+                <span>Padrão</span>
+            </div>
+
+            <div class="stat">
+                <strong>ETH</strong>
+                <span>Rede</span>
+            </div>
+
+        </div>
+
+        <div class="cta">
+
+            <a href="#comprar" class="btn btn-primary">
+                Conhecer USTD
+            </a>
+
+            <a href="#reserva" class="btn btn-outline">
+                Ver endereços
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- MERCADO -->
+    <section class="section section-dark" id="mercado">
+
+        <div class="container">
+
+            <div class="section-label">
+                MERCADO
+            </div>
+
+            <h2>
+                Cotação USTD
+            </h2>
+
+            <p class="sub">
+                Gráfico demonstrativo de variação de preço.
+            </p>
+
+            <div class="chart-box">
+
+                <div class="chart-head">
+
+                    <div class="asset-name">
+
+                        <img
+                            src="./ustd-icon.svg"
+                            alt="USTD"
+                        >
+
+                        <div>
+                            <strong>USTD</strong>
+                            <small>Ethereum ERC-20</small>
+                        </div>
+
+                    </div>
+
+                    <div class="range-btns">
+
+                        <button
+                            class="active"
+                            data-r="1m"
+                            type="button"
+                        >
+                            1m
+                        </button>
+
+                        <button
+                            data-r="30m"
+                            type="button"
+                        >
+                            30m
+                        </button>
+
+                        <button
+                            data-r="1h"
+                            type="button"
+                        >
+                            1h
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="price-line" id="price">
+                    $1.0000
+                </div>
+
+                <div class="change" id="change">
+                    Paridade de referência
+                </div>
+
+                <canvas id="usdtChart"></canvas>
+
+                <div class="chart-note">
+                    Dados exibidos de forma demonstrativa.
+                </div>
+
+                <div class="meta">
+
+                    <div>
+                        <span>Máximo</span>
+                        <strong id="high">$1.0000</strong>
+                    </div>
+
+                    <div>
+                        <span>Mínimo</span>
+                        <strong id="low">$0.9990</strong>
+                    </div>
+
+                    <div>
+                        <span>Rede</span>
+                        <strong>Ethereum</strong>
+                    </div>
+
+                    <div>
+                        <span>Padrão</span>
+                        <strong>ERC-20</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SOBRE -->
+    <section class="section" id="sobre">
+
+        <div class="container">
+
+            <div class="section-label">
+                SOBRE O PROJETO
+            </div>
+
+            <h2>
+                O que é USTD?
+            </h2>
+
+            <p class="sub">
+                Um token digital criado para utilização dentro do
+                ecossistema Ethereum.
+            </p>
+
+            <div class="grid grid-3">
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ◈
+                    </div>
+
+                    <h3>
+                        ERC-20
+                    </h3>
+
+                    <p>
+                        O USTD utiliza o padrão ERC-20 da rede Ethereum
+                        e possui 18 casas decimais.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ◎
+                    </div>
+
+                    <h3>
+                        Transparência
+                    </h3>
+
+                    <p>
+                        O contrato e os endereços apresentados podem
+                        ser consultados publicamente na blockchain.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ◆
+                    </div>
+
+                    <h3>
+                        Ethereum
+                    </h3>
+
+                    <p>
+                        Compatível com carteiras que suportam tokens
+                        ERC-20, incluindo MetaMask.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMPRAR / ADICIONAR -->
+    <section class="section section-dark" id="comprar">
+
+        <div class="container">
+
+            <div class="section-label">
+                ACESSO AO TOKEN
+            </div>
+
+            <h2>
+                Adicionar USTD à carteira
+            </h2>
+
+            <p class="sub">
+                Adicione o USTD diretamente à sua MetaMask utilizando
+                o contrato oficial do token.
+            </p>
+
+            <div class="buy-card">
+
+                <img
+                    src="./ustd-icon.svg"
+                    alt="USTD"
+                    class="buy-icon"
+                >
+
+                <div class="buy-content">
+
+                    <h3>
+                        USTD
+                    </h3>
+
+                    <p>
+                        Ethereum Mainnet • ERC-20 • 18 decimais
+                    </p>
+
+                    <code>
+                        0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655
+                    </code>
+
+                    <div class="buy-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            id="addWalletBtn"
+                            type="button"
+                        >
+                            Adicionar à MetaMask
+                        </button>
+
+                        <button
+                            class="btn btn-outline"
+                            id="copyContractBtn"
+                            type="button"
+                        >
+                            Copiar contrato
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="action-status"
+                        id="walletStatus"
+                        aria-live="polite"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ENDEREÇOS -->
+    <section class="section section-dark" id="reserva">
+
+        <div class="container">
+
+            <div class="section-label">
+                BLOCKCHAIN
+            </div>
+
+            <h2>
+                Endereços públicos
+            </h2>
+
+            <p class="sub">
+                Endereços informativos relacionados ao projeto.
+            </p>
+
+
+            <!-- CONTRATO -->
+            <div class="card address-card">
+
+                <div class="address-top">
+
+                    <div>
+                        <span class="address-label">
+                            CONTRATO DO TOKEN
+                        </span>
+
+                        <h3>
+                            USTD
+                        </h3>
+                    </div>
+
+                    <span class="network-tag">
+                        Ethereum
+                    </span>
+
+                </div>
+
+                <code id="t1">
+                    0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655
+                </code>
+
+                <button
+                    class="copy"
+                    onclick="copyId('t1')"
+                    type="button"
+                >
+                    Copiar endereço
+                </button>
+
+                <a
+                    class="explorer-link"
+                    href="https://etherscan.io/address/0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver no Etherscan ↗
+                </a>
+
+            </div>
+
+
+            <!-- CARTEIRA -->
+            <div class="card address-card">
+
+                <span class="address-label">
+                    CARTEIRA DE DOMÍNIO
+                </span>
+
+                <h3>
+                    Carteira pública
+                </h3>
+
+                <code id="t2">
+                    0x26Ef6c3AF50240F211E774213914f8DB526fA77d
+                </code>
+
+                <button
+                    class="copy"
+                    onclick="copyId('t2')"
+                    type="button"
+                >
+                    Copiar endereço
+                </button>
+
+                <a
+                    class="explorer-link"
+                    href="https://etherscan.io/address/0x26Ef6c3AF50240F211E774213914f8DB526fA77d"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver no Etherscan ↗
+                </a>
+
+                <div class="balance-tag">
+                    Saldo informado:
+                    <strong>
+                        3,489,155 USTD
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <!-- RESERVA -->
+            <div class="card address-card">
+
+                <span class="address-label">
+                    RESERVA / GARANTIA
+                </span>
+
+                <h3>
+                    Carteira de reserva
+                </h3>
+
+                <code id="t3">
+                    0xB0A27099582833c0Cb8C7A0565759fF145113d64
+                </code>
+
+                <button
+                    class="copy"
+                    onclick="copyId('t3')"
+                    type="button"
+                >
+                    Copiar endereço
+                </button>
+
+                <a
+                    class="explorer-link"
+                    href="https://etherscan.io/address/0xB0A27099582833c0Cb8C7A0565759fF145113d64"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Ver no Etherscan ↗
+                </a>
+
+                <p class="eth-balance">
+                    Saldo ETH:
+                    <strong id="bal">
+                        Consultando...
+                    </strong>
+                </p>
+
+                <div class="balance-tag">
+                    Valor informado:
+                    <strong>
+                        $40,000,000.00 USDT
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <a href="#" class="logo footer-logo">
+
+                <img
+                    src="./ustd-icon.svg"
+                    alt="USTD"
+                >
+
+                <span>USTD</span>
+
+            </a>
+
+            <p>
+                USTD — Digital Token on Ethereum
+            </p>
+
+            <p class="footer-small">
+                ERC-20 • Ethereum Mainnet
+            </p>
+
+            <div class="footer-line"></div>
+
+            <p>
+                © <span id="currentYear"></span> USTD.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         INTEGRAÇÃO USTD + METAMASK
+    ====================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            /*
+             * =================================================
+             * CONFIGURAÇÃO OFICIAL DO USTD
+             * =================================================
+             */
+
+            const CONTRACT_ADDRESS =
+                "0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655";
+
+            const TOKEN_SYMBOL = "USTD";
+
+            const TOKEN_DECIMALS = 18;
+
+            const TOKEN_IMAGE =
+                "https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeibbegqbhy4cwuy3ucyvetkep4ro4k6bhmyehogsv5nvojdxdizx3a";
+
+
+            /*
+             * =================================================
+             * ELEMENTOS
+             * =================================================
+             */
+
+            const addWalletBtn =
+                document.getElementById("addWalletBtn");
+
+            const copyContractBtn =
+                document.getElementById("copyContractBtn");
+
+            const walletStatus =
+                document.getElementById("walletStatus");
+
+
+            /*
+             * =================================================
+             * ADICIONAR USTD À METAMASK
+             * =================================================
+             */
+
+            if (addWalletBtn) {
+
+                addWalletBtn.addEventListener(
+                    "click",
+                    async () => {
+
+                        walletStatus.textContent = "";
+
+                        /*
+                         * Verifica se existe uma carteira
+                         * compatível com window.ethereum.
+                         */
+
+                        if (typeof window.ethereum === "undefined") {
+
+                            walletStatus.textContent =
+                                "MetaMask não encontrada. Abra este site no navegador da MetaMask.";
+
+                            return;
+                        }
+
+
+                        try {
+
+                            /*
+                             * Solicita conexão com a carteira.
+                             */
+
+                            await window.ethereum.request({
+                                method: "eth_requestAccounts"
+                            });
+
+
+                            /*
+                             * Verifica a rede atual.
+                             *
+                             * Ethereum Mainnet = 0x1
+                             */
+
+                            let chainId =
+                                await window.ethereum.request({
+                                    method: "eth_chainId"
+                                });
+
+
+                            /*
+                             * Se não estiver na Ethereum Mainnet,
+                             * solicita a mudança de rede.
+                             */
+
+                            if (chainId.toLowerCase() !== "0x1") {
+
+                                try {
+
+                                    await window.ethereum.request({
+                                        method: "wallet_switchEthereumChain",
+                                        params: [
+                                            {
+                                                chainId: "0x1"
+                                            }
+                                        ]
+                                    });
+
+                                } catch (switchError) {
+
+                                    console.error(
+                                        "Erro ao trocar de rede:",
+                                        switchError
+                                    );
+
+                                    walletStatus.textContent =
+                                        "Selecione Ethereum Mainnet na MetaMask e tente novamente.";
+
+                                    return;
+                                }
+
+                            }
+
+
+                            /*
+                             * Solicita à carteira a adição do token.
+                             *
+                             * wallet_watchAsset é o método utilizado
+                             * para solicitar a inclusão de um token.
+                             */
+
+                            const added =
+                                await window.ethereum.request({
+
+                                    method: "wallet_watchAsset",
+
+                                    params: {
+
+                                        type: "ERC20",
+
+                                        options: {
+
+                                            address:
+                                                CONTRACT_ADDRESS,
+
+                                            symbol:
+                                                TOKEN_SYMBOL,
+
+                                            decimals:
+                                                TOKEN_DECIMALS,
+
+                                            image:
+                                                TOKEN_IMAGE
+                                        }
+                                    }
+
+                                });
+
+
+                            /*
+                             * Resultado da solicitação.
+                             */
+
+                            if (added) {
+
+                                walletStatus.textContent =
+                                    "✓ USTD adicionado à MetaMask com sucesso.";
+
+                            } else {
+
+                                walletStatus.textContent =
+                                    "A adição do USTD foi cancelada.";
+
+                            }
+
+
+                        } catch (error) {
+
+                            console.error(
+                                "Erro ao adicionar USTD:",
+                                error
+                            );
+
+                            walletStatus.textContent =
+                                "Não foi possível adicionar o USTD. Tente novamente.";
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /*
+             * =================================================
+             * COPIAR CONTRATO
+             * =================================================
+             */
+
+            if (copyContractBtn) {
+
+                copyContractBtn.addEventListener(
+                    "click",
+                    async () => {
+
+                        try {
+
+                            await navigator.clipboard.writeText(
+                                CONTRACT_ADDRESS
+                            );
+
+                            const originalText =
+                                copyContractBtn.textContent;
+
+                            copyContractBtn.textContent =
+                                "Contrato copiado ✓";
+
+                            setTimeout(() => {
+
+                                copyContractBtn.textContent =
+                                    originalText;
+
+                            }, 2000);
+
+                        } catch (error) {
+
+                            console.error(
+                                "Erro ao copiar contrato:",
+                                error
+                            );
+
+                            copyContractBtn.textContent =
+                                "Não foi possível copiar";
+
+                        }
+
+                    }
+                );
+
+            }
+
+
+            /*
+             * =================================================
+             * COPIAR ENDEREÇOS
+             * =================================================
+             */
+
+            window.copyId = async function(id) {
+
+                const element =
+                    document.getElementById(id);
+
+                if (!element) return;
+
+                const address =
+                    element.textContent.trim();
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        address
+                    );
+
+                    const button =
+                        element.parentElement
+                            .querySelector(".copy");
+
+                    if (button) {
+
+                        const originalText =
+                            button.textContent;
+
+                        button.textContent =
+                            "Copiado ✓";
+
+                        setTimeout(() => {
+
+                            button.textContent =
+                                originalText;
+
+                        }, 2000);
+
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        "Erro ao copiar:",
+                        error
+                    );
+
+                }
+
+            };
+
+
+            /*
+             * =================================================
+             * ANO DO FOOTER
+             * =================================================
+             */
+
+            const year =
+                document.getElementById("currentYear");
+
+            if (year) {
+
+                year.textContent =
+                    new Date().getFullYear();
+
+            }
+
+
+            /*
+             * =================================================
+             * EVENTOS DE MUDANÇA DE CONTA / REDE
+             * =================================================
+             */
+
+            if (window.ethereum) {
+
+                window.ethereum.on(
+                    "chainChanged",
+                    () => {
+
+                        console.log(
+                            "Rede da carteira alterada."
+                        );
+
+                    }
+                );
+
+                window.ethereum.on(
+                    "accountsChanged",
+                    () => {
+
+                        console.log(
+                            "Conta da carteira alterada."
+                        );
+
+                    }
+                );
+
+            }
+
+        });
+
+    </script>
+
+</body>
+              </html>
