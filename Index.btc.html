@@ -1,1020 +1,430 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="theme-color" content="#06060c">
-    <title>USTD — Em Manutenção</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: linear-gradient(135deg, #06060c, #0f2e1a);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-family: system-ui, -apple-system, sans-serif;
-            padding: 30px;
-            text-align: center;
-        }
+TOKEN / USDT | WebGPU · Estilo Binance</title> <style> http://localhost:8080/grafico-token-usdt-webgpu.html 
+*{margin:0;padding:0;box-sizing:border-box} http://localhost:8080/grafico-token-usdt-webgpu.html :root{
+    --bg:#0B0E11; --bg2:#1E2329; --bg3:#2B3139; --verde:#089981; --vermelho:#F23645; --texto:#EAECEF; --cinza:#848E9C; --borda:#2A2F37; 
+    --destaque:#F0B90B; --usdt:#27AE60
+nano grafico-token-usdt-webgpu.html } 
+  html,body{width:100%;height:100%;background:var(--bg);color:var(--texto);font-family:-apple-system,BlinkMacSystemFont,Segoe 
+  UI,Roboto,sans-serif}
+  
+  .topo{padding:14px 16px;border-bottom:1px solid var(--borda);background:var(--bg2)} 
+  .par{font-size:20px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px} 
+  .token-logo{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:2px solid 
+  var(--destaque);overflow:hidden;display:flex;align-items:center;justify-content:center} .token-logo img{width:100%;height:100%;object-fit:cover} 
+  .usdt-badge{background:var(--usdt);color:white;font-size:12px;padding:2px 6px;border-radius:4px;margin-left:6px} .par 
+  span{color:var(--cinza);font-size:14px;font-weight:400} .preco-linha{display:flex;align-items:baseline;gap:12px;margin:6px 0} 
+  .preco{font-size:30px;font-weight:700;color:var(--verde)} .preco-usdt{font-size:16px;color:var(--usdt);margin-left:6px} 
+  .variacao{font-size:14px;padding:4px 8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde);font-weight:600} 
+  .variacao.vermelho{background:rgba(242,54,69,0.15);color:var(--vermelho)}
+<!DOCTYPE html> .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px} 
+  .info-item{font-size:12px;color:var(--cinza)} .info-item b{color:var(--texto);font-size:14px;display:block;margin-top:2px} .info-item.destaque 
+  b{color:var(--destaque)} .usdt-valor{color:var(--usdt);font-weight:600}
+<html lang="pt-BR"> .addr-box{margin-top:10px;padding:10px;background:var(--bg);border-radius:6px;border:1px solid var(--borda)} 
+  .addr-titulo{font-size:11px;color:var(--cinza);margin-bottom:4px} 
+  .addr-val{font-size:12px;word-break:break-all;font-family:monospace;color:var(--destaque)} 
+  .etiqueta{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg3);margin-right:6px;margin-bottom:4px}
+<head> .aba{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--borda);overflow-x:auto} .aba 
+  button{background:transparent;border:none;color:var(--cinza);padding:6px 
+  12px;border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap} .aba 
+  button.ativo{background:var(--bg3);color:var(--texto);font-weight:600}
+<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+#chartContainer{position:relative;width:100%;height:calc(100vh - 380px);min-height:380px;background:var(--bg)}
+<title>📈 TOKEN / USDT | WebGPU · Estilo Binance</title> #canvas{width:100%;height:100%;display:block} 
+  .status-webgpu{position:absolute;top:8px;right:12px;font-size:11px;padding:3px 
+  8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde)} 
+  .status-webgpu.indisponivel{background:rgba(242,54,69,0.15);color:var(--vermelho)}
+<style></style> </head> <body> *{margin:0;padding:0;box-sizing:border-box}
+  :root{<div class="topo">
+    --bg:#0B0E11; --bg2:#1E2329; --bg3:#2B3139; <div class="par"> <div class="token-logo" id="tokenLogo"> --verde:#089981; --vermelho:#F23645; 
+    --texto:#EAECEF; --cinza:#848E9C; <img 
+    src="https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeifombxsbri6li35g4s6rtk6zv5rvjbuadhbgzztxbalab5nlsypua" alt="Logo Token" 
+    onerror="this.style.display='none';this.parentElement.innerHTML='🪙'"> </div> <span id="tokenSimbolo">TOKEN</span> <span class="usdt-badge">/ 
+    USDT</span> --borda:#2A2F37; --destaque:#F0B90B; --usdt:#27AE60 </div>
+  }  <div style="font-size:13px;color:var(--cinza);margin-top:4px">💵 Paridade: 1 Token = <span class="usdt-valor">1.00 USDT</span> = $1.00 
+  }  USD</div>
+  html,body{width:100%;height:100%;background:var(--bg);color:var(--texto);font-family:-apple-system,BlinkMacSystemFont,Segoe 
+  UI,Roboto,sans-serif} <div class="preco-linha"> .topo{padding:14px 16px;border-bottom:1px solid var(--borda);background:var(--bg2)} <div 
+  class="preco" id="precoAtual">1.000000</div> .par{font-size:20px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px} 
+  <div class="preco-usdt">USDT</div> .token-logo{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:2px solid 
+  var(--destaque);overflow:hidden;display:flex;align-items:center;justify-content:center} <div class="variacao" id="variacao">+0.00%</div> </div> 
+  .token-logo img{width:100%;height:100%;object-fit:cover} <div class="info-grid"> 
+  .usdt-badge{background:var(--usdt);color:white;font-size:12px;padding:2px 6px;border-radius:4px;margin-left:6px} <div class="info-item">Preço 
+  Abertura<b id="abertura"><span class="usdt-valor">1.000000 USDT</span></b></div> .par span{color:var(--cinza);font-size:14px;font-weight:400} 
+  <div class="info-item">Máxima 24h<b id="maxima"><span class="usdt-valor">1.000000 USDT</span></b></div> 
+  .preco-linha{display:flex;align-items:baseline;gap:12px;margin:6px 0} <div class="info-item">Mínima 24h<b id="minima"><span 
+  class="usdt-valor">1.000000 USDT</span></b></div> .preco{font-size:30px;font-weight:700;color:var(--verde)} <div class="info-item">Volume 24h<b 
+  id="volume"><span class="usdt-valor">0.00 USDT</span></b></div> .preco-usdt{font-size:16px;color:var(--usdt);margin-left:6px} <div 
+  class="info-item">Supply Total<b id="supply">--</b></div> .variacao{font-size:14px;padding:4px 
+  8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde);font-weight:600} <div class="info-item destaque">SEU SALDO<b 
+  id="saldoCarteira">--</b></div> </div> .variacao.vermelho{background:rgba(242,54,69,0.15);color:var(--vermelho)} <div class="addr-box"> 
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px} <div class="addr-titulo"><span 
+  class="etiqueta">CONTRATO</span>Endereço do Token</div> .info-item{font-size:12px;color:var(--cinza)} <div 
+  class="addr-val">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</div> </div> <div class="addr-box" style="margin-top:8px"> .info-item 
+  b{color:var(--texto);font-size:14px;display:block;margin-top:2px} <div class="addr-titulo"><span class="etiqueta">CARTEIRA</span>Seu 
+  Endereço</div> .info-item.destaque b{color:var(--destaque)} <div class="addr-val">0x26Ef6c3AF50240F211E774213914f8DB526fA77d</div> </div> 
+  .usdt-valor{color:var(--usdt);font-weight:600}</div> .addr-box{margin-top:10px;padding:10px;background:var(--bg);border-radius:6px;border:1px 
+  solid var(--borda)} .addr-titulo{font-size:11px;color:var(--cinza);margin-bottom:4px}<div class="aba"> <button class="ativo" 
+  data-per="1h">1H</button> <button data-per="4h">4H</button> <button data-per="1d">1D</button> <button data-per="1w">1S</button> <button 
+  data-per="1m">1M</button> .addr-val{font-size:12px;word-break:break-all;font-family:monospace;color:var(--destaque)}</div> 
+  .etiqueta{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg3);margin-right:6px;margin-bottom:4px} 
+  .aba{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--borda);overflow-x:auto}<div id="chartContainer"> <span 
+  class="status-webgpu" id="statusWebGPU">🔄 Iniciando WebGPU...</span> <canvas id="canvas"></canvas> .aba 
+  button{background:transparent;border:none;color:var(--cinza);padding:6px 
+  12px;border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap}</div> .aba 
+  button.ativo{background:var(--bg3);color:var(--texto);font-weight:600}
+  #chartContainer{position:relative;width:100%;height:calc(100vh - 380px);min-height:380px;background:var(--bg)}<script> 
+  #canvas{width:100%;height:100%;display:block}const CONTRATO_TOKEN = '0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655';
+  .status-webgpu{position:absolute;top:8px;right:12px;font-size:11px;padding:3px 
+8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde)}const CARTEIRA_USUARIO = '0x26Ef6c3AF50240F211E774213914f8DB526fA77d'; 
+const PRECO_BASE_USDT = 1.00; // 1 Token = 1 USDT
+  .status-webgpu.indisponivel{background:rgba(242,54,69,0.15);color:var(--vermelho)} let dadosVelas = []; let dispositivo, contexto, formato, 
+pipeline, bindGroupLayout; let precoMin = PRECO_BASE_USDT, precoMax = PRECO_BASE_USDT; </style> async function inicializarWebGPU() { </head> const 
+statusEl = document.getElementById('statusWebGPU'); <body> const canvas = document.getElementById('canvas'); <div class="topo">
+  <div class="par"> if (!navigator.gpu) { statusEl.textContent = '❌ WebGPU indisponível'; statusEl.classList.add('indisponivel'); return false; 
+    <div class="token-logo" id="tokenLogo"> }
+      <img src="https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeifombxsbri6li35g4s6rtk6zv5rvjbuadhbgzztxbalab5nlsypua" alt="Logo Token" 
+  onerror="this.style.display='none';this.parentElement.innerHTML='🪙'"> const adaptador = await navigator.gpu.requestAdapter(); if (!adaptador) {
+    </div> statusEl.textContent = '❌ Sem GPU compatível'; statusEl.classList.add('indisponivel'); return false; <span 
+    id="tokenSimbolo">TOKEN</span> <span class="usdt-badge">/ USDT</span> }
+  </div> dispositivo = await adaptador.requestDevice(); contexto = canvas.getContext('webgpu'); formato = 
+  navigator.gpu.getPreferredCanvasFormat(); <div style="font-size:13px;color:var(--cinza);margin-top:4px">💵 Paridade: 1 Token = <span 
+  class="usdt-valor">1.00 USDT</span> = $1.00 USD</div> contexto.configure({ device: dispositivo, format: formato, alphaMode: 'premultiplied' }); 
+  <div class="preco-linha"> const codigoShader = `
+    <div class="preco" id="precoAtual">1.000000</div> struct Uniforms { precoMin: f32, precoMax: f32, padding: f32, padding2: f32 } @group(0) 
+    @binding(0) var<uniform> u: Uniforms; struct Vela { tempo: f32, aberto: f32, fechado: f32, maximo: f32, minimo: f32, volume: f32 } @group(0) 
+    @binding(1) var<storage, read> velas: array<Vela>; <div class="preco-usdt">USDT</div> struct VertexOutput { @builtin(position) pos: vec4<f32>, 
+    @location(0) cor: vec3<f32> } <div class="variacao" id="variacao">+0.00%</div> @vertex fn vs_vela(@builtin(vertex_index) vi: u32, 
+    @builtin(instance_index) ii: u32) -> VertexOutput {
+  </div> let v = velas[ii]; let precoRange = u.precoMax - u.precoMin; let x = (f32(ii) + 0.5) / f32(arrayCount(&velas)) * 2.0 - 1.0; let 
+      larguraVela = 1.5 / f32(arrayCount(&velas));
+  <div class="info-grid">
+    <div class="info-item">Preço Abertura<b id="abertura"><span class="usdt-valor">1.000000 USDT</span></b></div>
+    <div class="info-item">Máxima 24h<b id="maxima"><span class="usdt-valor">1.000000 USDT</span></b></div>
+    <div class="info-item">Mínima 24h<b id="minima"><span class="usdt-valor">1.000000 USDT</span></b></div>
+    <div class="info-item">Volume 24h<b id="volume"><span class="usdt-valor">0.00 USDT</span></b></div>
+    <div class="info-item">Supply Total<b id="supply">--</b></div>
+    <div class="info-item destaque">SEU SALDO<b id="saldoCarteira">--</b></div>
+  </div>
+  <div class="addr-box">
+    <div class="addr-titulo"><span class="etiqueta">CONTRATO</span>Endereço do Token</div>
+    <div class="addr-val">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</div>
+  </div>
+  <div class="addr-box" style="margin-top:8px">
+    <div class="addr-titulo"><span class="etiqueta">CARTEIRA</span>Seu Endereço</div>
+    <div class="addr-val">0x26Ef6c3AF50240F211E774213914f8DB526fA77d</div>
+  </div>
+</div>
+<div class="aba">
+  <button class="ativo" data-per="1h">1H</button>
+  <button data-per="4h">4H</button>
+  <button data-per="1d">1D</button>
+  <button data-per="1w">1S</button>
+  <button data-per="1m">1M</button>
+</div>
+<div id="chartContainer">
+  <span class="status-webgpu" id="statusWebGPU">🔄 Iniciando WebGPU...</span>
+  <canvas id="canvas"></canvas>
+</div>
+<script>
+const CONTRATO_TOKEN = '0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655';
+const CARTEIRA_USUARIO = '0x26Ef6c3AF50240F211E774213914f8DB526fA77d';
+const PRECO_BASE_USDT = 1.00;
+let dadosVelas = [];
+let dispositivo, contexto, formato, pipeline, bindGroupLayout;
+let precoMin = PRECO_BASE_USDT, precoMax = PRECO_BASE_USDT;
+async function inicializarWebGPU() {
+  const statusEl = document.getElementById('statusWebGPU');
+  const canvas = document.getElementById('canvas');
+  if (!navigator.gpu) { statusEl.textContent = '❌ WebGPU indisponível'; statusEl.classList.add('indisponivel'); return false; }
+  const adaptador = await navigator.gpu.requestAdapter();
+  if (!adaptador) { statusEl.textContent = '❌ Sem GPU compatível'; statusEl.classList.add('indisponivel'); return false; }
+  dispositivo = await adaptador.requestDevice();
+  contexto = canvas.getContext('webgpu');
+  formato = navigator.gpu.getPreferredCanvasFormat();
+  contexto.configure({ device: dispositivo, format: formato, alphaMode: 'premultiplied' });
+  const codigoShader = `
+    struct Uniforms { precoMin: f32, precoMax: f32, padding: f32, padding2: f32 }
+    @group(0) @binding(0) var<uniform> u: Uniforms;
+    struct Vela { tempo: f32, aberto: f32, fechado: f32, maximo: f32, minimo: f32, volume: f32 }
+    @group(0) @binding(1) var<storage, read> velas: array<Vela>;
+    struct VertexOutput { @builtin(position) pos: vec4<f32>, @location(0) cor: vec3<f32> }
+    @vertex fn vs_vela(@builtin(vertex_index) vi: u32, @builtin(instance_index) ii: u32) -> VertexOutput {
+      let v = velas[ii];
+      let precoRange = u.precoMax - u.precoMin;
+      let x = (f32(ii) + 0.5) / f32(arrayCount(&velas)) * 2.0 - 1.0;
+      let larguraVela = 1.5 / f32(arrayCount(&velas));
+      let yAberto = 1.0 - ((v.aberto - u.precoMin) / precoRange) * 2.0;
+      let yFechado = 1.0 - ((v.fechado - u.precoMin) / precoRange) * 2.0;
+      let yMaximo = 1.0 - ((v.maximo - u.precoMin) / precoRange) * 2.0;
+      let yMinimo = 1.0 - ((v.minimo - u.precoMin) / precoRange) * 2.0;
+      let corpoTop = max(yAberto, yFechado);
+      let corpoBase = min(yAberto, yFechado);
+      let cor = select(vec3<f32>(0.031, 0.6, 0.505), vec3<f32>(0.949, 0.211, 0.270), v.fechado < v.aberto);
+      var pos = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+      if vi == 0 { pos = vec4<f32>(x - larguraVela, corpoBase, 0.0, 1.0); }
+      else if vi == 1 { pos = vec4<f32>(x + larguraVela, corpoBase, 0.0, 1.0); }
+      else if vi == 2 { pos = vec4<f32>(x + larguraVela, corpoTop, 0.0, 1.0); }
+      else if vi == 3 { pos = vec4<f32>(x - larguraVela, corpoTop, 0.0, 1.0); }
+      else if vi == 4 { pos = vec4<f32>(x - 0.005, yMinimo, 0.0, 1.0); }
+      else if vi == 5 { pos = vec4<f32>(x + 0.005, yMinimo, 0.0, 1.0); }
+      else if vi == 6 { pos = vec4<f32>(x + 0.005, yMaximo, 0.0, 1.0); }
+      else if vi == 7 { pos = vec4<f32>(x - 0.005, yMaximo, 0.0, 1.0); }
+      var output: VertexOutput; output.pos = pos; output.cor = cor; return output;
+    }
+    @fragment fn fs_vela(input: VertexOutput) -> @location(0) vec4<f32> { return vec4<f32>(input.cor, 1.0); }
+  `;
+  const moduloShader = dispositivo.createShaderModule({ code: codigoShader });
+  bindGroupLayout = dispositivo.createBindGroupLayout({
+    entries: [{ binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },{ binding: 1, visibility: GPUShaderStage.VERTEX, buffer: { type: 'read-only-storage' } }]
+  });
+  const layoutPipeline = dispositivo.createPipelineLayout({ bindGroupLayouts: [bindGroupLayout] });
+  pipeline = dispositivo.createRenderPipeline({
+    layout: layoutPipeline,
+    vertex: { module: moduloShader, entryPoint: 'vs_vela' },
+    fragment: { module: moduloShader, entryPoint: 'fs_vela', targets: [{ format: formato }] },
+    primitive: { topology: 'triangle-strip' }
+  });
+  statusEl.textContent = '✅ WebGPU ativo';
+  return true;
+}
+function gerarDadosVelas(periodo = '1d') {
+  const agora = Math.floor(Date.now() / 1000);
+  dadosVelas = [];
+  let intervalo = 3600, qtd = 24;
+  if (periodo === '4h') { intervalo = 14400; qtd = 12; }
+  else if (periodo === '1d') { intervalo = 86400; qtd = 30; }
+  else if (periodo === '1w') { intervalo = 604800; qtd = 12; }
+  else if (periodo === '1m') { intervalo = 2592000; qtd = 6; }
+  let preco = PRECO_BASE_USDT;
+  precoMin = preco; precoMax = preco; let volTotal = 0;
+  for (let i = qtd; i >= 0; i--) {
+    const variacao = (Math.random() - 0.5) * 0.02;
+    const abertura = preco;
+    const fechado = preco * (1 + variacao);
+    const maximo = Math.max(abertura, fechado) * (1 + Math.random() * 0.005);
+    const minimo = Math.min(abertura, fechado) * (1 - Math.random() * 0.005);
+    const volume = Math.random() * 100000 + 50000;
+    dadosVelas.push({ tempo: agora - (i * intervalo), aberto: abertura, fechado, maximo, minimo, volume });
+    preco = fechado;
+    precoMin = Math.min(precoMin, minimo);
+    precoMax = Math.max(precoMax, maximo);
+    volTotal += volume;
+  }
+  const ultimo = dadosVelas[dadosVelas.length - 1];
+  document.getElementById('precoAtual').textContent = ultimo.fechado.toFixed(6);
+  document.getElementById('abertura').innerHTML = `<span class="usdt-valor">${ultimo.aberto.toFixed(6)} USDT</span>`;
+  document.getElementById('maxima').innerHTML = `<span class="usdt-valor">${precoMax.toFixed(6)} USDT</span>`;
+  document.getElementById('minima').innerHTML = `<span class="usdt-valor">${precoMin.toFixed(6)} USDT</span>`;
+  document.getElementById('volume').innerHTML = `<span class="usdt-valor">${volTotal.toLocaleString('en-US', {minimumFractionDigits:2})} USDT</span>`;
+  const varPct = ((ultimo.fechado - dadosVelas[0].aberto) / dadosVelas[0].aberto) * 100;
+  const elVar = document.getElementById('variacao');
+  elVar.innerHTML = `${varPct >= 0 ? '+' : ''}${varPct.toFixed(2)}%`;
+  elVar.className = `variacao ${varPct < 0 ? 'vermelho' : ''}`;
+  renderizarWebGPU();
+}
+function renderizarWebGPU() {
+  if (!dispositivo || dadosVelas.length === 0) return;
+  const canvas = document.getElementById('canvas');
+  const container = document.getElementById('chartContainer');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = container.clientWidth * dpr;
+  canvas.height = container.clientHeight * dpr;
+  const dadosVelaBuffer = new Float32Array(dadosVelas.length * 6);
+  dadosVelas.forEach((v, i) => {
+    dadosVelaBuffer[i * 6 + 0] = v.tempo;
+    dadosVelaBuffer[i * 6 + 1] = v.aberto;
+    dadosVelaBuffer[i * 6 + 2] = v.fechado;
+    dadosVelaBuffer[i * 6 + 3] = v.maximo;
+    dadosVelaBuffer[i * 6 + 4] = v.minimo;
+    dadosVelaBuffer[i * 6 + 5] = v.volume;
+  });
+  const velaBuffer = dispositivo.createBuffer({ size: dadosVelaBuffer.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
+  dispositivo.queue.writeBuffer(velaBuffer, 0, dadosVelaBuffer);
+  const uniforms = new Float32Array([precoMin, precoMax, 0, 0]);
+  const uniformBuffer = dispositivo.createBuffer({ size: uniforms.byteLength, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
+  dispositivo.queue.writeBuffer(uniformBuffer, 0, uniforms);
+  const bindGroup = dispositivo.createBindGroup({ layout: bindGroupLayout, entries: [{ binding: 0, resource: { buffer: uniformBuffer } },{ binding: 1, resource: { buffer: velaBuffer } }] });
+  const codificador = dispositivo.createCommandEncoder();
+  const alvo = contexto.getCurrentTexture().createView();
+  const pass = codificador.beginRenderPass({ colorAttachments: [{ view: alvo, loadOp: 'clear', clearValue: { r: 0.043, g: 0.055, b: 0.067, a: 1 }, storeOp: 'store' }] });
+  pass.setPipeline(pipeline);
+  pass.setBindGroup(0, bindGroup);
+  for (let i = 0; i < dadosVelas.length; i++) { pass.draw(4, 1, 0, i); pass.draw(4, 1, 4, i); }
+  pass.end();
+  dispositivo.queue.submit([codificador.finish()]);
+}
+document.querySelectorAll('.aba button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.aba button').forEach(b => b.classList.remove('ativo'));
+    btn.classList.add('ativo');
+    gerarDadosVelas(btn.dataset.per);
+  });
+});
+window.addEventListener('load', async () => { await inicializarWebGPU(); gerarDadosVelas('1d'); });
+</script>
+</body>
+</html>      
+      let yAberto = 1.0 - ((v.aberto - u.precoMin) / precoRange) * 2.0;
+      let yFechado = 1.0 - ((v.fechado - u.precoMin) / precoRange) * 2.0;
+      let yMaximo = 1.0 - ((v.maximo - u.precoMin) / precoRange) * 2.0;
+      let yMinimo = 1.0 - ((v.minimo - u.precoMin) / precoRange) * 2.0;
+      
+      let corpoTop = max(yAberto, yFechado);
+      let corpoBase = min(yAberto, yFechado);
+      let cor = select(vec3<f32>(0.031, 0.6, 0.505), vec3<f32>(0.949, 0.211, 0.270), v.fechado < v.aberto);
+      
+      var pos = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+      if vi == 0 { pos = vec4<f32>(x - larguraVela, corpoBase, 0.0, 1.0); }
+      else if vi == 1 { pos = vec4<f32>(x + larguraVela, corpoBase, 0.0, 1.0); }
+      else if vi == 2 { pos = vec4<f32>(x + larguraVela, corpoTop, 0.0, 1.0); }
+      else if vi == 3 { pos = vec4<f32>(x - larguraVela, corpoTop, 0.0, 1.0); }
+      else if vi == 4 { pos = vec4<f32>(x - 0.005, yMinimo, 0.0, 1.0); }
+      else if vi == 5 { pos = vec4<f32>(x + 0.005, yMinimo, 0.0, 1.0); }
+      else if vi == 6 { pos = vec4<f32>(x + 0.005, yMaximo, 0.0, 1.0); }
+      else if vi == 7 { pos = vec4<f32>(x - 0.005, yMaximo, 0.0, 1.0); }
+      
+      var output: VertexOutput;
+      output.pos = pos;
+      output.cor = cor;
+      return output;
+    }
+    @fragment fn fs_vela(input: VertexOutput) -> @location(0) vec4<f32> { return vec4<f32>(input.cor, 1.0); }
+  `;
 
-        /* === TÍTULO PRINCIPAL === */
-        .titulo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #ffd700;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        }
+  const moduloShader = dispositivo.createShaderModule({ code: codigoShader });
+  bindGroupLayout = dispositivo.createBindGroupLayout({
+    entries: [
+      { binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },
+      { binding: 1, visibility: GPUShaderStage.VERTEX, buffer: { type: 'read-only-storage' } },
+    ],
+  });
 
-        /* === CÓDIGO DE CONFIGURAÇÃO === */
-        .code-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #22c55e;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
-            max-width: 500px;
-            width: 100%;
-            text-align: left;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            color: #90ee90;
-            line-height: 1.8;
-            overflow-x: auto;
-        }
+  const layoutPipeline = dispositivo.createPipelineLayout({ bindGroupLayouts: [bindGroupLayout] });
+  pipeline = dispositivo.createRenderPipeline({
+    layout: layoutPipeline,
+    vertex: { module: moduloShader, entryPoint: 'vs_vela' },
+    fragment: { module: moduloShader, entryPoint: 'fs_vela', targets: [{ format: formato }] },
+    primitive: { topology: 'triangle-strip' },
+  });
 
-        /* === REDE ETHEREUM === */
-        .eth-info {
-            font-size: 1.1rem;
-            color: #aaa;
-            margin: 15px 0 30px;
-        }
+  statusEl.textContent = '✅ WebGPU ativo';
+  return true;
+}
 
-        /* === ASSINATURA ESTILO HUMANO === */
-        .assinatura {
-            margin-top: 40px;
-        }
-        .assinatura .linha1 {
-            font-size: 1.3rem;
-            color: #fff;
-            font-style: italic;
-        }
-        .assinatura .nome {
-            font-size: 2rem;
-            color: #ffd700;
-            font-family: 'Brush Script MT', 'Segoe Script', cursive;
-            margin-top: 10px;
-            letter-spacing: 2px;
-        }
-        .assinatura .risco {
-            width: 220px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            margin: 10px auto 0;
-        }
+function gerarDadosVelas(periodo = '1d') {
+  const agora = Math.floor(Date.now() / 1000);
+  dadosVelas = [];
+  let intervalo = 3600, qtd = 24;
+  if (periodo === '4h') { intervalo = 14400; qtd = 12; }
+  else if (periodo === '1d') { intervalo = 86400; qtd = 30; }
+  else if (periodo === '1w') { intervalo = 604800; qtd = 12; }
+  else if (periodo === '1m') { intervalo = 2592000; qtd = 6; }
 
-        /* === ANIMAÇÃO === */
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-    </style>
-</head>
-<body>
+  let preco = PRECO_BASE_USDT;
+  precoMin = preco; precoMax = preco; let volTotal = 0;
 
-    <h1 class="titulo pulse">🔧 USTD em MANUTENÇÃO</h1>
+  for (let i = qtd; i >= 0; i--) {
+    const variacao = (Math.random() - 0.5) * 0.02;
+    const abertura = preco;
+    const fechado = preco * (1 + variacao);
+    const maximo = Math.max(abertura, fechado) * (1 + Math.random() * 0.005);
+    const minimo = Math.min(abertura, fechado) * (1 - Math.random() * 0.005);
+    const volume = Math.random() * 100000 + 50000;
 
-    <div class="code-box">
-<span>// CONFIGURAÇÃO DO TOKEN</span><br>
-<span>CONTRATO: 0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</span><br>
-<span>REDE: Ethereum Mainnet</span><br>
-<span>PADRÃO: ERC-20</span><br>
-<span>DECIMAIS: 18</span><br>
-<span>SÍMBOLO: USTD</span><br>
-<span>STATUS: Atualizando dados on-chain...</span><br>
-<span>AGUARDE — Em breve disponível</span>
-    </div>
+    dadosVelas.push({ tempo: agora - (i * intervalo), aberto: abertura, fechado, maximo, minimo, volume });
+    preco = fechado;
+    precoMin = Math.min(precoMin, minimo);
+    precoMax = Math.max(precoMax, maximo);
+    volTotal += volume;
+  }
 
-    <p class="eth-info">
-        ✨ Desenvolvido pela rede <strong style="color: #627eea;">Ethereum</strong>
-    </p>
+  const ultimo = dadosVelas[dadosVelas.length - 1];
+  document.getElementById('precoAtual').textContent = ultimo.fechado.toFixed(6);
+  document.getElementById('abertura').innerHTML = `<span class="usdt-valor">${ultimo.aberto.toFixed(6)} USDT</span>`;
+  document.getElementById('maxima').innerHTML = `<span class="usdt-valor">${precoMax.toFixed(6)} USDT</span>`;
+  document.getElementById('minima').innerHTML = `<span class="usdt-valor">${precoMin.toFixed(6)} USDT</span>`;
+  document.getElementById('volume').innerHTML = `<span class="usdt-valor">${volTotal.toLocaleString('en-US', {minimumFractionDigits:2})} USDT</span>`;
+  
+  const varPct = ((ultimo.fechado - dadosVelas[0].aberto) / dadosVelas[0].aberto) * 100;
+  const elVar = document.getElementById('variacao');
+  elVar.innerHTML = `${varPct >= 0 ? '+' : ''}${varPct.toFixed(2)}%`;
+  elVar.className = `variacao ${varPct < 0 ? 'vermelho' : ''}`;
 
-    <div class="assinatura">
-        <p class="linha1">programador</p>
-        <h2 class="nome">Eliel Lara</h2>
-        <div class="risco"></div>
-    </div>
+  renderizarWebGPU();
+}
 
+function renderizarWebGPU() {
+  if (!dispositivo || dadosVelas.length === 0) return;
+  const canvas = document.getElementById('canvas');
+  const container = document.getElementById('chartContainer');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = container.clientWidth * dpr;
+  canvas.height = container.clientHeight * dpr;
+
+  const dadosVelaBuffer = new Float32Array(dadosVelas.length * 6);
+  dadosVelas.forEach((v, i) => {
+    dadosVelaBuffer[i * 6 + 0] = v.tempo;
+    dadosVelaBuffer[i * 6 + 1] = v.aberto;
+    dadosVelaBuffer[i * 6 + 2] = v.fechado;
+    dadosVelaBuffer[i * 6 + 3] = v.maximo;
+    dadosVelaBuffer[i * 6 + 4] = v.minimo;
+    dadosVelaBuffer[i * 6 + 5] = v.volume;
+  });
+
+  const velaBuffer = dispositivo.createBuffer({
+    size: dadosVelaBuffer.byteLength,
+    usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
+  });
+  dispositivo.queue.writeBuffer(velaBuffer, 0, dadosVelaBuffer);
+
+  const uniforms = new Float32Array([precoMin, precoMax, 0, 0]);
+  const uniformBuffer = dispositivo.createBuffer({
+    size: uniforms.byteLength,
+    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
+  });
+  dispositivo.queue.writeBuffer(uniformBuffer, 0, uniforms);
+
+  const bindGroup = dispositivo.createBindGroup({
+    layout: bindGroupLayout,
+    entries: [
+      { binding: 0, resource: { buffer: uniformBuffer } },
+      { binding: 1, resource: { buffer: velaBuffer } },
+    ],
+  });
+
+  const codificador = dispositivo.createCommandEncoder();
+  const alvo = contexto.getCurrentTexture().createView();
+  const pass = codificador.beginRenderPass({
+    colorAttachments: [{
+      view: alvo,
+      loadOp: 'clear',
+      clearValue: { r: 0.043, g: 0.055, b: 0.067, a: 1 },
+      storeOp: 'store',
+    }],
+  });
+
+  pass.setPipeline(pipeline);
+  pass.setBindGroup(0, bindGroup);
+  for (let i = 0; i < dadosVelas.length; i++) {
+    pass.draw(4, 1, 0, i);
+    pass.draw(4, 1, 4, i);
+  }
+  pass.end();
+
+  dispositivo.queue.submit([codificador.finish()]);
+}
+
+document.querySelectorAll('.aba button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.aba button').forEach(b => b.classList.remove('ativo'));
+    btn.classList.add('ativo');
+    gerarDadosVelas(btn.dataset.per);
+  });
+});
+
+window.addEventListener('load', async () => {
+  await inicializarWebGPU();
+  gerarDadosVelas('1d');
+});
+</script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-
-    <meta name="theme-color" content="#06060c">
-    <meta
-        name="description"
-        content="USTD — Token digital ERC-20 na rede Ethereum."
-    >
-
-    <title>USTD — Stablecoin</title>
-
-    <link rel="icon" type="image/svg+xml" href="./ustd-icon.svg">
-    <link rel="stylesheet" href="./style.css">
-</head>
-
-<body>
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="container nav-inner">
-
-            <a href="#" class="logo">
-                <img src="./ustd-icon.svg" alt="USTD">
-                <span>USTD</span>
-            </a>
-
-            <a href="#comprar" class="btn btn-primary">
-                Comprar USTD
-            </a>
-
-        </div>
-    </nav>
-
-
-    <!-- HERO -->
-    <header class="hero container">
-
-        <div class="badge">
-            Ethereum • ERC-20
-        </div>
-
-        <h1>
-            USTD
-            <br>
-            <span>Digital Token</span>
-        </h1>
-
-        <p>
-            Um token digital desenvolvido para operar na rede Ethereum,
-            com contrato público e informações on-chain para consulta.
-        </p>
-
-        <div class="stats">
-
-            <div class="stat">
-                <strong>18</strong>
-                <span>Decimais</span>
-            </div>
-
-            <div class="stat">
-                <strong>ERC-20</strong>
-                <span>Padrão</span>
-            </div>
-
-            <div class="stat">
-                <strong>ETH</strong>
-                <span>Rede</span>
-            </div>
-
-        </div>
-
-        <div class="cta">
-
-            <a href="#comprar" class="btn btn-primary">
-                Conhecer USTD
-            </a>
-
-            <a href="#reserva" class="btn btn-outline">
-                Ver endereços
-            </a>
-
-        </div>
-
-    </header>
-
-
-    <!-- MERCADO -->
-    <section class="section section-dark" id="mercado">
-
-        <div class="container">
-
-            <div class="section-label">
-                MERCADO
-            </div>
-
-            <h2>
-                Cotação USTD
-            </h2>
-
-            <p class="sub">
-                Gráfico demonstrativo de variação de preço.
-            </p>
-
-            <div class="chart-box">
-
-                <div class="chart-head">
-
-                    <div class="asset-name">
-
-                        <img
-                            src="./ustd-icon.svg"
-                            alt="USTD"
-                        >
-
-                        <div>
-                            <strong>USTD</strong>
-                            <small>Ethereum ERC-20</small>
-                        </div>
-
-                    </div>
-
-                    <div class="range-btns">
-
-                        <button
-                            class="active"
-                            data-r="1m"
-                            type="button"
-                        >
-                            1m
-                        </button>
-
-                        <button
-                            data-r="30m"
-                            type="button"
-                        >
-                            30m
-                        </button>
-
-                        <button
-                            data-r="1h"
-                            type="button"
-                        >
-                            1h
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div class="price-line" id="price">
-                    $1.0000
-                </div>
-
-                <div class="change" id="change">
-                    Paridade de referência
-                </div>
-
-                <canvas id="usdtChart"></canvas>
-
-                <div class="chart-note">
-                    Dados exibidos de forma demonstrativa.
-                </div>
-
-                <div class="meta">
-
-                    <div>
-                        <span>Máximo</span>
-                        <strong id="high">$1.0000</strong>
-                    </div>
-
-                    <div>
-                        <span>Mínimo</span>
-                        <strong id="low">$0.9990</strong>
-                    </div>
-
-                    <div>
-                        <span>Rede</span>
-                        <strong>Ethereum</strong>
-                    </div>
-
-                    <div>
-                        <span>Padrão</span>
-                        <strong>ERC-20</strong>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- SOBRE -->
-    <section class="section" id="sobre">
-
-        <div class="container">
-
-            <div class="section-label">
-                SOBRE O PROJETO
-            </div>
-
-            <h2>
-                O que é USTD?
-            </h2>
-
-            <p class="sub">
-                Um token digital criado para utilização dentro do
-                ecossistema Ethereum.
-            </p>
-
-            <div class="grid grid-3">
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        ◈
-                    </div>
-
-                    <h3>
-                        ERC-20
-                    </h3>
-
-                    <p>
-                        O USTD utiliza o padrão ERC-20 da rede Ethereum
-                        e possui 18 casas decimais.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        ◎
-                    </div>
-
-                    <h3>
-                        Transparência
-                    </h3>
-
-                    <p>
-                        O contrato e os endereços apresentados podem
-                        ser consultados publicamente na blockchain.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="card-icon">
-                        ◆
-                    </div>
-
-                    <h3>
-                        Ethereum
-                    </h3>
-
-                    <p>
-                        Compatível com carteiras que suportam tokens
-                        ERC-20, incluindo MetaMask.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- COMPRAR / ADICIONAR -->
-    <section class="section section-dark" id="comprar">
-
-        <div class="container">
-
-            <div class="section-label">
-                ACESSO AO TOKEN
-            </div>
-
-            <h2>
-                Adicionar USTD à carteira
-            </h2>
-
-            <p class="sub">
-                Adicione o USTD diretamente à sua MetaMask utilizando
-                o contrato oficial do token.
-            </p>
-
-            <div class="buy-card">
-
-                <img
-                    src="./ustd-icon.svg"
-                    alt="USTD"
-                    class="buy-icon"
-                >
-
-                <div class="buy-content">
-
-                    <h3>
-                        USTD
-                    </h3>
-
-                    <p>
-                        Ethereum Mainnet • ERC-20 • 18 decimais
-                    </p>
-
-                    <code>
-                        0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655
-                    </code>
-
-                    <div class="buy-actions">
-
-                        <button
-                            class="btn btn-primary"
-                            id="addWalletBtn"
-                            type="button"
-                        >
-                            Adicionar à MetaMask
-                        </button>
-
-                        <button
-                            class="btn btn-outline"
-                            id="copyContractBtn"
-                            type="button"
-                        >
-                            Copiar contrato
-                        </button>
-
-                    </div>
-
-                    <div
-                        class="action-status"
-                        id="walletStatus"
-                        aria-live="polite"
-                    ></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ENDEREÇOS -->
-    <section class="section section-dark" id="reserva">
-
-        <div class="container">
-
-            <div class="section-label">
-                BLOCKCHAIN
-            </div>
-
-            <h2>
-                Endereços públicos
-            </h2>
-
-            <p class="sub">
-                Endereços informativos relacionados ao projeto.
-            </p>
-
-
-            <!-- CONTRATO -->
-            <div class="card address-card">
-
-                <div class="address-top">
-
-                    <div>
-                        <span class="address-label">
-                            CONTRATO DO TOKEN
-                        </span>
-
-                        <h3>
-                            USTD
-                        </h3>
-                    </div>
-
-                    <span class="network-tag">
-                        Ethereum
-                    </span>
-
-                </div>
-
-                <code id="t1">
-                    0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655
-                </code>
-
-                <button
-                    class="copy"
-                    onclick="copyId('t1')"
-                    type="button"
-                >
-                    Copiar endereço
-                </button>
-
-                <a
-                    class="explorer-link"
-                    href="https://etherscan.io/address/0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Ver no Etherscan ↗
-                </a>
-
-            </div>
-
-
-            <!-- CARTEIRA -->
-            <div class="card address-card">
-
-                <span class="address-label">
-                    CARTEIRA DE DOMÍNIO
-                </span>
-
-                <h3>
-                    Carteira pública
-                </h3>
-
-                <code id="t2">
-                    0x26Ef6c3AF50240F211E774213914f8DB526fA77d
-                </code>
-
-                <button
-                    class="copy"
-                    onclick="copyId('t2')"
-                    type="button"
-                >
-                    Copiar endereço
-                </button>
-
-                <a
-                    class="explorer-link"
-                    href="https://etherscan.io/address/0x26Ef6c3AF50240F211E774213914f8DB526fA77d"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Ver no Etherscan ↗
-                </a>
-
-                <div class="balance-tag">
-                    Saldo informado:
-                    <strong>
-                        3,489,155 USTD
-                    </strong>
-                </div>
-
-            </div>
-
-
-            <!-- RESERVA -->
-            <div class="card address-card">
-
-                <span class="address-label">
-                    RESERVA / GARANTIA
-                </span>
-
-                <h3>
-                    Carteira de reserva
-                </h3>
-
-                <code id="t3">
-                    0xB0A27099582833c0Cb8C7A0565759fF145113d64
-                </code>
-
-                <button
-                    class="copy"
-                    onclick="copyId('t3')"
-                    type="button"
-                >
-                    Copiar endereço
-                </button>
-
-                <a
-                    class="explorer-link"
-                    href="https://etherscan.io/address/0xB0A27099582833c0Cb8C7A0565759fF145113d64"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Ver no Etherscan ↗
-                </a>
-
-                <p class="eth-balance">
-                    Saldo ETH:
-                    <strong id="bal">
-                        Consultando...
-                    </strong>
-                </p>
-
-                <div class="balance-tag">
-                    Valor informado:
-                    <strong>
-                        $40,000,000.00 USDT
-                    </strong>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-    <footer class="footer">
-
-        <div class="container">
-
-            <a href="#" class="logo footer-logo">
-
-                <img
-                    src="./ustd-icon.svg"
-                    alt="USTD"
-                >
-
-                <span>USTD</span>
-
-            </a>
-
-            <p>
-                USTD — Digital Token on Ethereum
-            </p>
-
-            <p class="footer-small">
-                ERC-20 • Ethereum Mainnet
-            </p>
-
-            <div class="footer-line"></div>
-
-            <p>
-                © <span id="currentYear"></span> USTD.
-                Todos os direitos reservados.
-            </p>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =====================================================
-         INTEGRAÇÃO USTD + METAMASK
-    ====================================================== -->
-
-    <script>
-
-        document.addEventListener("DOMContentLoaded", () => {
-
-            /*
-             * =================================================
-             * CONFIGURAÇÃO OFICIAL DO USTD
-             * =================================================
-             */
-
-            const CONTRACT_ADDRESS =
-                "0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655";
-
-            const TOKEN_SYMBOL = "USTD";
-
-            const TOKEN_DECIMALS = 18;
-
-            const TOKEN_IMAGE =
-                "https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeibbegqbhy4cwuy3ucyvetkep4ro4k6bhmyehogsv5nvojdxdizx3a";
-
-
-            /*
-             * =================================================
-             * ELEMENTOS
-             * =================================================
-             */
-
-            const addWalletBtn =
-                document.getElementById("addWalletBtn");
-
-            const copyContractBtn =
-                document.getElementById("copyContractBtn");
-
-            const walletStatus =
-                document.getElementById("walletStatus");
-
-
-            /*
-             * =================================================
-             * ADICIONAR USTD À METAMASK
-             * =================================================
-             */
-
-            if (addWalletBtn) {
-
-                addWalletBtn.addEventListener(
-                    "click",
-                    async () => {
-
-                        walletStatus.textContent = "";
-
-                        /*
-                         * Verifica se existe uma carteira
-                         * compatível com window.ethereum.
-                         */
-
-                        if (typeof window.ethereum === "undefined") {
-
-                            walletStatus.textContent =
-                                "MetaMask não encontrada. Abra este site no navegador da MetaMask.";
-
-                            return;
-                        }
-
-
-                        try {
-
-                            /*
-                             * Solicita conexão com a carteira.
-                             */
-
-                            await window.ethereum.request({
-                                method: "eth_requestAccounts"
-                            });
-
-
-                            /*
-                             * Verifica a rede atual.
-                             *
-                             * Ethereum Mainnet = 0x1
-                             */
-
-                            let chainId =
-                                await window.ethereum.request({
-                                    method: "eth_chainId"
-                                });
-
-
-                            /*
-                             * Se não estiver na Ethereum Mainnet,
-                             * solicita a mudança de rede.
-                             */
-
-                            if (chainId.toLowerCase() !== "0x1") {
-
-                                try {
-
-                                    await window.ethereum.request({
-                                        method: "wallet_switchEthereumChain",
-                                        params: [
-                                            {
-                                                chainId: "0x1"
-                                            }
-                                        ]
-                                    });
-
-                                } catch (switchError) {
-
-                                    console.error(
-                                        "Erro ao trocar de rede:",
-                                        switchError
-                                    );
-
-                                    walletStatus.textContent =
-                                        "Selecione Ethereum Mainnet na MetaMask e tente novamente.";
-
-                                    return;
-                                }
-
-                            }
-
-
-                            /*
-                             * Solicita à carteira a adição do token.
-                             *
-                             * wallet_watchAsset é o método utilizado
-                             * para solicitar a inclusão de um token.
-                             */
-
-                            const added =
-                                await window.ethereum.request({
-
-                                    method: "wallet_watchAsset",
-
-                                    params: {
-
-                                        type: "ERC20",
-
-                                        options: {
-
-                                            address:
-                                                CONTRACT_ADDRESS,
-
-                                            symbol:
-                                                TOKEN_SYMBOL,
-
-                                            decimals:
-                                                TOKEN_DECIMALS,
-
-                                            image:
-                                                TOKEN_IMAGE
-                                        }
-                                    }
-
-                                });
-
-
-                            /*
-                             * Resultado da solicitação.
-                             */
-
-                            if (added) {
-
-                                walletStatus.textContent =
-                                    "✓ USTD adicionado à MetaMask com sucesso.";
-
-                            } else {
-
-                                walletStatus.textContent =
-                                    "A adição do USTD foi cancelada.";
-
-                            }
-
-
-                        } catch (error) {
-
-                            console.error(
-                                "Erro ao adicionar USTD:",
-                                error
-                            );
-
-                            walletStatus.textContent =
-                                "Não foi possível adicionar o USTD. Tente novamente.";
-
-                        }
-
-                    }
-                );
-
-            }
-
-
-            /*
-             * =================================================
-             * COPIAR CONTRATO
-             * =================================================
-             */
-
-            if (copyContractBtn) {
-
-                copyContractBtn.addEventListener(
-                    "click",
-                    async () => {
-
-                        try {
-
-                            await navigator.clipboard.writeText(
-                                CONTRACT_ADDRESS
-                            );
-
-                            const originalText =
-                                copyContractBtn.textContent;
-
-                            copyContractBtn.textContent =
-                                "Contrato copiado ✓";
-
-                            setTimeout(() => {
-
-                                copyContractBtn.textContent =
-                                    originalText;
-
-                            }, 2000);
-
-                        } catch (error) {
-
-                            console.error(
-                                "Erro ao copiar contrato:",
-                                error
-                            );
-
-                            copyContractBtn.textContent =
-                                "Não foi possível copiar";
-
-                        }
-
-                    }
-                );
-
-            }
-
-
-            /*
-             * =================================================
-             * COPIAR ENDEREÇOS
-             * =================================================
-             */
-
-            window.copyId = async function(id) {
-
-                const element =
-                    document.getElementById(id);
-
-                if (!element) return;
-
-                const address =
-                    element.textContent.trim();
-
-                try {
-
-                    await navigator.clipboard.writeText(
-                        address
-                    );
-
-                    const button =
-                        element.parentElement
-                            .querySelector(".copy");
-
-                    if (button) {
-
-                        const originalText =
-                            button.textContent;
-
-                        button.textContent =
-                            "Copiado ✓";
-
-                        setTimeout(() => {
-
-                            button.textContent =
-                                originalText;
-
-                        }, 2000);
-
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        "Erro ao copiar:",
-                        error
-                    );
-
-                }
-
-            };
-
-
-            /*
-             * =================================================
-             * ANO DO FOOTER
-             * =================================================
-             */
-
-            const year =
-                document.getElementById("currentYear");
-
-            if (year) {
-
-                year.textContent =
-                    new Date().getFullYear();
-
-            }
-
-
-            /*
-             * =================================================
-             * EVENTOS DE MUDANÇA DE CONTA / REDE
-             * =================================================
-             */
-
-            if (window.ethereum) {
-
-                window.ethereum.on(
-                    "chainChanged",
-                    () => {
-
-                        console.log(
-                            "Rede da carteira alterada."
-                        );
-
-                    }
-                );
-
-                window.ethereum.on(
-                    "accountsChanged",
-                    () => {
-
-                        console.log(
-                            "Conta da carteira alterada."
-                        );
-
-                    }
-                );
-
-            }
-
-        });
-
-    </script>
-
-</body>
-              </html>
