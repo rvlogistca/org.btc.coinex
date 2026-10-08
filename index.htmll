@@ -1,429 +1,307 @@
-TOKEN / USDT | WebGPU · Estilo Binance</title> <style> http://localhost:8080/grafico-token-usdt-webgpu.html 
-*{margin:0;padding:0;box-sizing:border-box} http://localhost:8080/grafico-token-usdt-webgpu.html :root{
-    --bg:#0B0E11; --bg2:#1E2329; --bg3:#2B3139; --verde:#089981; --vermelho:#F23645; --texto:#EAECEF; --cinza:#848E9C; --borda:#2A2F37; 
-    --destaque:#F0B90B; --usdt:#27AE60
-nano grafico-token-usdt-webgpu.html } 
-  html,body{width:100%;height:100%;background:var(--bg);color:var(--texto);font-family:-apple-system,BlinkMacSystemFont,Segoe 
-  UI,Roboto,sans-serif}
-  
-  .topo{padding:14px 16px;border-bottom:1px solid var(--borda);background:var(--bg2)} 
-  .par{font-size:20px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px} 
-  .token-logo{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:2px solid 
-  var(--destaque);overflow:hidden;display:flex;align-items:center;justify-content:center} .token-logo img{width:100%;height:100%;object-fit:cover} 
-  .usdt-badge{background:var(--usdt);color:white;font-size:12px;padding:2px 6px;border-radius:4px;margin-left:6px} .par 
-  span{color:var(--cinza);font-size:14px;font-weight:400} .preco-linha{display:flex;align-items:baseline;gap:12px;margin:6px 0} 
-  .preco{font-size:30px;font-weight:700;color:var(--verde)} .preco-usdt{font-size:16px;color:var(--usdt);margin-left:6px} 
-  .variacao{font-size:14px;padding:4px 8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde);font-weight:600} 
-  .variacao.vermelho{background:rgba(242,54,69,0.15);color:var(--vermelho)}
-<!DOCTYPE html> .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px} 
-  .info-item{font-size:12px;color:var(--cinza)} .info-item b{color:var(--texto);font-size:14px;display:block;margin-top:2px} .info-item.destaque 
-  b{color:var(--destaque)} .usdt-valor{color:var(--usdt);font-weight:600}
-<html lang="pt-BR"> .addr-box{margin-top:10px;padding:10px;background:var(--bg);border-radius:6px;border:1px solid var(--borda)} 
-  .addr-titulo{font-size:11px;color:var(--cinza);margin-bottom:4px} 
-  .addr-val{font-size:12px;word-break:break-all;font-family:monospace;color:var(--destaque)} 
-  .etiqueta{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg3);margin-right:6px;margin-bottom:4px}
-<head> .aba{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--borda);overflow-x:auto} .aba 
-  button{background:transparent;border:none;color:var(--cinza);padding:6px 
-  12px;border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap} .aba 
-  button.ativo{background:var(--bg3);color:var(--texto);font-weight:600}
-<meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-#chartContainer{position:relative;width:100%;height:calc(100vh - 380px);min-height:380px;background:var(--bg)}
-<title>📈 TOKEN / USDT | WebGPU · Estilo Binance</title> #canvas{width:100%;height:100%;display:block} 
-  .status-webgpu{position:absolute;top:8px;right:12px;font-size:11px;padding:3px 
-  8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde)} 
-  .status-webgpu.indisponivel{background:rgba(242,54,69,0.15);color:var(--vermelho)}
-<style></style> </head> <body> *{margin:0;padding:0;box-sizing:border-box}
-  :root{<div class="topo">
-    --bg:#0B0E11; --bg2:#1E2329; --bg3:#2B3139; <div class="par"> <div class="token-logo" id="tokenLogo"> --verde:#089981; --vermelho:#F23645; 
-    --texto:#EAECEF; --cinza:#848E9C; <img 
-    src="https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeifombxsbri6li35g4s6rtk6zv5rvjbuadhbgzztxbalab5nlsypua" alt="Logo Token" 
-    onerror="this.style.display='none';this.parentElement.innerHTML='🪙'"> </div> <span id="tokenSimbolo">TOKEN</span> <span class="usdt-badge">/ 
-    USDT</span> --borda:#2A2F37; --destaque:#F0B90B; --usdt:#27AE60 </div>
-  }  <div style="font-size:13px;color:var(--cinza);margin-top:4px">💵 Paridade: 1 Token = <span class="usdt-valor">1.00 USDT</span> = $1.00 
-  }  USD</div>
-  html,body{width:100%;height:100%;background:var(--bg);color:var(--texto);font-family:-apple-system,BlinkMacSystemFont,Segoe 
-  UI,Roboto,sans-serif} <div class="preco-linha"> .topo{padding:14px 16px;border-bottom:1px solid var(--borda);background:var(--bg2)} <div 
-  class="preco" id="precoAtual">1.000000</div> .par{font-size:20px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px} 
-  <div class="preco-usdt">USDT</div> .token-logo{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:2px solid 
-  var(--destaque);overflow:hidden;display:flex;align-items:center;justify-content:center} <div class="variacao" id="variacao">+0.00%</div> </div> 
-  .token-logo img{width:100%;height:100%;object-fit:cover} <div class="info-grid"> 
-  .usdt-badge{background:var(--usdt);color:white;font-size:12px;padding:2px 6px;border-radius:4px;margin-left:6px} <div class="info-item">Preço 
-  Abertura<b id="abertura"><span class="usdt-valor">1.000000 USDT</span></b></div> .par span{color:var(--cinza);font-size:14px;font-weight:400} 
-  <div class="info-item">Máxima 24h<b id="maxima"><span class="usdt-valor">1.000000 USDT</span></b></div> 
-  .preco-linha{display:flex;align-items:baseline;gap:12px;margin:6px 0} <div class="info-item">Mínima 24h<b id="minima"><span 
-  class="usdt-valor">1.000000 USDT</span></b></div> .preco{font-size:30px;font-weight:700;color:var(--verde)} <div class="info-item">Volume 24h<b 
-  id="volume"><span class="usdt-valor">0.00 USDT</span></b></div> .preco-usdt{font-size:16px;color:var(--usdt);margin-left:6px} <div 
-  class="info-item">Supply Total<b id="supply">--</b></div> .variacao{font-size:14px;padding:4px 
-  8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde);font-weight:600} <div class="info-item destaque">SEU SALDO<b 
-  id="saldoCarteira">--</b></div> </div> .variacao.vermelho{background:rgba(242,54,69,0.15);color:var(--vermelho)} <div class="addr-box"> 
-  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px} <div class="addr-titulo"><span 
-  class="etiqueta">CONTRATO</span>Endereço do Token</div> .info-item{font-size:12px;color:var(--cinza)} <div 
-  class="addr-val">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</div> </div> <div class="addr-box" style="margin-top:8px"> .info-item 
-  b{color:var(--texto);font-size:14px;display:block;margin-top:2px} <div class="addr-titulo"><span class="etiqueta">CARTEIRA</span>Seu 
-  Endereço</div> .info-item.destaque b{color:var(--destaque)} <div class="addr-val">0x26Ef6c3AF50240F211E774213914f8DB526fA77d</div> </div> 
-  .usdt-valor{color:var(--usdt);font-weight:600}</div> .addr-box{margin-top:10px;padding:10px;background:var(--bg);border-radius:6px;border:1px 
-  solid var(--borda)} .addr-titulo{font-size:11px;color:var(--cinza);margin-bottom:4px}<div class="aba"> <button class="ativo" 
-  data-per="1h">1H</button> <button data-per="4h">4H</button> <button data-per="1d">1D</button> <button data-per="1w">1S</button> <button 
-  data-per="1m">1M</button> .addr-val{font-size:12px;word-break:break-all;font-family:monospace;color:var(--destaque)}</div> 
-  .etiqueta{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg3);margin-right:6px;margin-bottom:4px} 
-  .aba{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--borda);overflow-x:auto}<div id="chartContainer"> <span 
-  class="status-webgpu" id="statusWebGPU">🔄 Iniciando WebGPU...</span> <canvas id="canvas"></canvas> .aba 
-  button{background:transparent;border:none;color:var(--cinza);padding:6px 
-  12px;border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap}</div> .aba 
-  button.ativo{background:var(--bg3);color:var(--texto);font-weight:600}
-  #chartContainer{position:relative;width:100%;height:calc(100vh - 380px);min-height:380px;background:var(--bg)}<script> 
-  #canvas{width:100%;height:100%;display:block}const CONTRATO_TOKEN = '0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655';
-  .status-webgpu{position:absolute;top:8px;right:12px;font-size:11px;padding:3px 
-8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde)}const CARTEIRA_USUARIO = '0x26Ef6c3AF50240F211E774213914f8DB526fA77d'; 
-const PRECO_BASE_USDT = 1.00; // 1 Token = 1 USDT
-  .status-webgpu.indisponivel{background:rgba(242,54,69,0.15);color:var(--vermelho)} let dadosVelas = []; let dispositivo, contexto, formato, 
-pipeline, bindGroupLayout; let precoMin = PRECO_BASE_USDT, precoMax = PRECO_BASE_USDT; </style> async function inicializarWebGPU() { </head> const 
-statusEl = document.getElementById('statusWebGPU'); <body> const canvas = document.getElementById('canvas'); <div class="topo">
-  <div class="par"> if (!navigator.gpu) { statusEl.textContent = '❌ WebGPU indisponível'; statusEl.classList.add('indisponivel'); return false; 
-    <div class="token-logo" id="tokenLogo"> }
-      <img src="https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeifombxsbri6li35g4s6rtk6zv5rvjbuadhbgzztxbalab5nlsypua" alt="Logo Token" 
-  onerror="this.style.display='none';this.parentElement.innerHTML='🪙'"> const adaptador = await navigator.gpu.requestAdapter(); if (!adaptador) {
-    </div> statusEl.textContent = '❌ Sem GPU compatível'; statusEl.classList.add('indisponivel'); return false; <span 
-    id="tokenSimbolo">TOKEN</span> <span class="usdt-badge">/ USDT</span> }
-  </div> dispositivo = await adaptador.requestDevice(); contexto = canvas.getContext('webgpu'); formato = 
-  navigator.gpu.getPreferredCanvasFormat(); <div style="font-size:13px;color:var(--cinza);margin-top:4px">💵 Paridade: 1 Token = <span 
-  class="usdt-valor">1.00 USDT</span> = $1.00 USD</div> contexto.configure({ device: dispositivo, format: formato, alphaMode: 'premultiplied' }); 
-  <div class="preco-linha"> const codigoShader = `
-    <div class="preco" id="precoAtual">1.000000</div> struct Uniforms { precoMin: f32, precoMax: f32, padding: f32, padding2: f32 } @group(0) 
-    @binding(0) var<uniform> u: Uniforms; struct Vela { tempo: f32, aberto: f32, fechado: f32, maximo: f32, minimo: f32, volume: f32 } @group(0) 
-    @binding(1) var<storage, read> velas: array<Vela>; <div class="preco-usdt">USDT</div> struct VertexOutput { @builtin(position) pos: vec4<f32>, 
-    @location(0) cor: vec3<f32> } <div class="variacao" id="variacao">+0.00%</div> @vertex fn vs_vela(@builtin(vertex_index) vi: u32, 
-    @builtin(instance_index) ii: u32) -> VertexOutput {
-  </div> let v = velas[ii]; let precoRange = u.precoMax - u.precoMin; let x = (f32(ii) + 0.5) / f32(arrayCount(&velas)) * 2.0 - 1.0; let 
-      larguraVela = 1.5 / f32(arrayCount(&velas));
-  <div class="info-grid">
-    <div class="info-item">Preço Abertura<b id="abertura"><span class="usdt-valor">1.000000 USDT</span></b></div>
-    <div class="info-item">Máxima 24h<b id="maxima"><span class="usdt-valor">1.000000 USDT</span></b></div>
-    <div class="info-item">Mínima 24h<b id="minima"><span class="usdt-valor">1.000000 USDT</span></b></div>
-    <div class="info-item">Volume 24h<b id="volume"><span class="usdt-valor">0.00 USDT</span></b></div>
-    <div class="info-item">Supply Total<b id="supply">--</b></div>
-    <div class="info-item destaque">SEU SALDO<b id="saldoCarteira">--</b></div>
-  </div>
-  <div class="addr-box">
-    <div class="addr-titulo"><span class="etiqueta">CONTRATO</span>Endereço do Token</div>
-    <div class="addr-val">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</div>
-  </div>
-  <div class="addr-box" style="margin-top:8px">
-    <div class="addr-titulo"><span class="etiqueta">CARTEIRA</span>Seu Endereço</div>
-    <div class="addr-val">0x26Ef6c3AF50240F211E774213914f8DB526fA77d</div>
-  </div>
-</div>
-<div class="aba">
-  <button class="ativo" data-per="1h">1H</button>
-  <button data-per="4h">4H</button>
-  <button data-per="1d">1D</button>
-  <button data-per="1w">1S</button>
-  <button data-per="1m">1M</button>
-</div>
-<div id="chartContainer">
-  <span class="status-webgpu" id="statusWebGPU">🔄 Iniciando WebGPU...</span>
-  <canvas id="canvas"></canvas>
-</div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📈 USTD / USDT | WebGPU · Estilo Binance</title>
+    <style>
+        :root{
+            --bg:#0B0E11; --bg2:#1E2329; --bg3:#2B3139;
+            --verde:#089981; --vermelho:#F23645; --texto:#EAECEF;
+            --cinza:#848E9C; --borda:#2A2F37; --destaque:#F0B90B;
+            --usdt:#27AE60
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{width:100%;height:100%;background:var(--bg);color:var(--texto);font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif}
+        .topo{padding:14px 16px;border-bottom:1px solid var(--borda);background:var(--bg2)}
+        .par{font-size:20px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+        .token-logo{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:2px solid var(--destaque);overflow:hidden;display:flex;align-items:center;justify-content:center}
+        .token-logo img{width:100%;height:100%;object-fit:cover}
+        .usdt-badge{background:var(--usdt);color:white;font-size:12px;padding:2px 6px;border-radius:4px;margin-left:6px}
+        .par span{color:var(--cinza);font-size:14px;font-weight:400}
+        .preco-linha{display:flex;align-items:baseline;gap:12px;margin:6px 0}
+        .preco{font-size:30px;font-weight:700;color:var(--verde)}
+        .preco-usdt{font-size:16px;color:var(--usdt);margin-left:6px}
+        .variacao{font-size:14px;padding:4px 8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde);font-weight:600}
+        .variacao.vermelho{background:rgba(242,54,69,0.15);color:var(--vermelho)}
+        .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:12px}
+        .info-item{font-size:12px;color:var(--cinza)}
+        .info-item b{color:var(--texto);font-size:14px;display:block;margin-top:2px}
+        .info-item.destaque b{color:var(--destaque)}
+        .usdt-valor{color:var(--usdt);font-weight:600}
+        .addr-box{margin-top:10px;padding:10px;background:var(--bg);border-radius:6px;border:1px solid var(--borda)}
+        .addr-titulo{font-size:11px;color:var(--cinza);margin-bottom:4px}
+        .addr-val{font-size:12px;word-break:break-all;font-family:monospace;color:var(--destaque)}
+        .etiqueta{display:inline-block;font-size:10px;padding:2px 6px;border-radius:3px;background:var(--bg3);margin-right:6px;margin-bottom:4px}
+        .aba{display:flex;gap:6px;padding:8px 16px;border-bottom:1px solid var(--borda);overflow-x:auto}
+        .aba button{background:transparent;border:none;color:var(--cinza);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:13px;white-space:nowrap}
+        .aba button.ativo{background:var(--bg3);color:var(--texto);font-weight:600}
+        #chartContainer{position:relative;width:100%;height:calc(100vh - 380px);min-height:380px;background:var(--bg)}
+        #canvas{width:100%;height:100%;display:block}
+        .status-webgpu{position:absolute;top:8px;right:12px;font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(8,153,129,0.15);color:var(--verde)}
+        .status-webgpu.indisponivel{background:rgba(242,54,69,0.15);color:var(--vermelho)}
+        .copiar{cursor:pointer;font-size:11px;color:var(--destaque);margin-left:8px}
+        .copiar:hover{text-decoration:underline}
+    </style>
+</head>
+<body>
+    <div class="topo">
+        <div class="par">
+            <div class="token-logo" id="tokenLogo">
+                <img src="https://coffee-decisive-puma-198.mypinata.cloud/ipfs/bafybeifombxsbri6li35g4s6rtk6zv5rvjbuadhbgzztxbalab5nlsypua" alt="USTD" onerror="this.src='./ustd-icon.png'">
+            </div>
+            <span id="tokenSimbolo">USTD</span>
+            <span class="usdt-badge">/ USDT</span>
+        </div>
+        <div style="font-size:13px;color:var(--cinza);margin-top:4px">💵 Paridade: 1 USTD = <span class="usdt-valor">1.00 USDT</span> = $1.00 USD</div>
+        <div class="preco-linha">
+            <div class="preco" id="precoAtual">1.000000</div>
+            <div class="preco-usdt">USDT</div>
+            <div class="variacao" id="variacao">+0.00%</div>
+        </div>
+        <div class="info-grid">
+            <div class="info-item">Preço Abertura<b id="abertura"><span class="usdt-valor">1.000000 USDT</span></b></div>
+            <div class="info-item">Máxima 24h<b id="maxima"><span class="usdt-valor">1.000000 USDT</span></b></div>
+            <div class="info-item">Mínima 24h<b id="minima"><span class="usdt-valor">1.000000 USDT</span></b></div>
+            <div class="info-item">Volume 24h<b id="volume"><span class="usdt-valor">0.00 USDT</span></b></div>
+            <div class="info-item">Supply Total<b id="supply">--</b></div>
+            <div class="info-item destaque">SEU SALDO<b id="saldoCarteira">--</b></div>
+        </div>
+        <div class="addr-box">
+            <div class="addr-titulo"><span class="etiqueta">CONTRATO</span>Endereço do Token <span class="copiar" onclick="navigator.clipboard.writeText('0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655').then(()=>alert('Copiado!'))">[Copiar]</span></div>
+            <div class="addr-val">0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655</div>
+        </div>
+        <div class="addr-box" style="margin-top:8px">
+            <div class="addr-titulo"><span class="etiqueta">CARTEIRA</span>Seu Endereço <span class="copiar" onclick="navigator.clipboard.writeText('0x26Ef6c3AF50240F211E774213914f8DB526fA77d').then(()=>alert('Copiado!'))">[Copiar]</span></div>
+            <div class="addr-val">0x26Ef6c3AF50240F211E774213914f8DB526fA77d</div>
+        </div>
+    </div>
+
+    <div class="aba">
+        <button class="ativo" data-per="1h">1H</button>
+        <button data-per="4h">4H</button>
+        <button data-per="1d">1D</button>
+        <button data-per="1w">1S</button>
+        <button data-per="1m">1M</button>
+    </div>
+
+    <div id="chartContainer">
+        <span class="status-webgpu" id="statusWebGPU">🔄 Iniciando WebGPU...</span>
+        <canvas id="canvas"></canvas>
+    </div>
+
 <script>
 const CONTRATO_TOKEN = '0x4644E1113FE1a6bA831D85cc4772b3D0c23DE655';
 const CARTEIRA_USUARIO = '0x26Ef6c3AF50240F211E774213914f8DB526fA77d';
 const PRECO_BASE_USDT = 1.00;
+
 let dadosVelas = [];
 let dispositivo, contexto, formato, pipeline, bindGroupLayout;
 let precoMin = PRECO_BASE_USDT, precoMax = PRECO_BASE_USDT;
+
 async function inicializarWebGPU() {
-  const statusEl = document.getElementById('statusWebGPU');
-  const canvas = document.getElementById('canvas');
-  if (!navigator.gpu) { statusEl.textContent = '❌ WebGPU indisponível'; statusEl.classList.add('indisponivel'); return false; }
-  const adaptador = await navigator.gpu.requestAdapter();
-  if (!adaptador) { statusEl.textContent = '❌ Sem GPU compatível'; statusEl.classList.add('indisponivel'); return false; }
-  dispositivo = await adaptador.requestDevice();
-  contexto = canvas.getContext('webgpu');
-  formato = navigator.gpu.getPreferredCanvasFormat();
-  contexto.configure({ device: dispositivo, format: formato, alphaMode: 'premultiplied' });
-  const codigoShader = `
-    struct Uniforms { precoMin: f32, precoMax: f32, padding: f32, padding2: f32 }
-    @group(0) @binding(0) var<uniform> u: Uniforms;
-    struct Vela { tempo: f32, aberto: f32, fechado: f32, maximo: f32, minimo: f32, volume: f32 }
-    @group(0) @binding(1) var<storage, read> velas: array<Vela>;
-    struct VertexOutput { @builtin(position) pos: vec4<f32>, @location(0) cor: vec3<f32> }
-    @vertex fn vs_vela(@builtin(vertex_index) vi: u32, @builtin(instance_index) ii: u32) -> VertexOutput {
-      let v = velas[ii];
-      let precoRange = u.precoMax - u.precoMin;
-      let x = (f32(ii) + 0.5) / f32(arrayCount(&velas)) * 2.0 - 1.0;
-      let larguraVela = 1.5 / f32(arrayCount(&velas));
-      let yAberto = 1.0 - ((v.aberto - u.precoMin) / precoRange) * 2.0;
-      let yFechado = 1.0 - ((v.fechado - u.precoMin) / precoRange) * 2.0;
-      let yMaximo = 1.0 - ((v.maximo - u.precoMin) / precoRange) * 2.0;
-      let yMinimo = 1.0 - ((v.minimo - u.precoMin) / precoRange) * 2.0;
-      let corpoTop = max(yAberto, yFechado);
-      let corpoBase = min(yAberto, yFechado);
-      let cor = select(vec3<f32>(0.031, 0.6, 0.505), vec3<f32>(0.949, 0.211, 0.270), v.fechado < v.aberto);
-      var pos = vec4<f32>(0.0, 0.0, 0.0, 1.0);
-      if vi == 0 { pos = vec4<f32>(x - larguraVela, corpoBase, 0.0, 1.0); }
-      else if vi == 1 { pos = vec4<f32>(x + larguraVela, corpoBase, 0.0, 1.0); }
-      else if vi == 2 { pos = vec4<f32>(x + larguraVela, corpoTop, 0.0, 1.0); }
-      else if vi == 3 { pos = vec4<f32>(x - larguraVela, corpoTop, 0.0, 1.0); }
-      else if vi == 4 { pos = vec4<f32>(x - 0.005, yMinimo, 0.0, 1.0); }
-      else if vi == 5 { pos = vec4<f32>(x + 0.005, yMinimo, 0.0, 1.0); }
-      else if vi == 6 { pos = vec4<f32>(x + 0.005, yMaximo, 0.0, 1.0); }
-      else if vi == 7 { pos = vec4<f32>(x - 0.005, yMaximo, 0.0, 1.0); }
-      var output: VertexOutput; output.pos = pos; output.cor = cor; return output;
+    const statusEl = document.getElementById('statusWebGPU');
+    const canvas = document.getElementById('canvas');
+    
+    if (!navigator.gpu) {
+        statusEl.textContent = '❌ WebGPU indisponível';
+        statusEl.classList.add('indisponivel');
+        return false;
     }
-    @fragment fn fs_vela(input: VertexOutput) -> @location(0) vec4<f32> { return vec4<f32>(input.cor, 1.0); }
-  `;
-  const moduloShader = dispositivo.createShaderModule({ code: codigoShader });
-  bindGroupLayout = dispositivo.createBindGroupLayout({
-    entries: [{ binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },{ binding: 1, visibility: GPUShaderStage.VERTEX, buffer: { type: 'read-only-storage' } }]
-  });
-  const layoutPipeline = dispositivo.createPipelineLayout({ bindGroupLayouts: [bindGroupLayout] });
-  pipeline = dispositivo.createRenderPipeline({
-    layout: layoutPipeline,
-    vertex: { module: moduloShader, entryPoint: 'vs_vela' },
-    fragment: { module: moduloShader, entryPoint: 'fs_vela', targets: [{ format: formato }] },
-    primitive: { topology: 'triangle-strip' }
-  });
-  statusEl.textContent = '✅ WebGPU ativo';
-  return true;
-}
-function gerarDadosVelas(periodo = '1d') {
-  const agora = Math.floor(Date.now() / 1000);
-  dadosVelas = [];
-  let intervalo = 3600, qtd = 24;
-  if (periodo === '4h') { intervalo = 14400; qtd = 12; }
-  else if (periodo === '1d') { intervalo = 86400; qtd = 30; }
-  else if (periodo === '1w') { intervalo = 604800; qtd = 12; }
-  else if (periodo === '1m') { intervalo = 2592000; qtd = 6; }
-  let preco = PRECO_BASE_USDT;
-  precoMin = preco; precoMax = preco; let volTotal = 0;
-  for (let i = qtd; i >= 0; i--) {
-    const variacao = (Math.random() - 0.5) * 0.02;
-    const abertura = preco;
-    const fechado = preco * (1 + variacao);
-    const maximo = Math.max(abertura, fechado) * (1 + Math.random() * 0.005);
-    const minimo = Math.min(abertura, fechado) * (1 - Math.random() * 0.005);
-    const volume = Math.random() * 100000 + 50000;
-    dadosVelas.push({ tempo: agora - (i * intervalo), aberto: abertura, fechado, maximo, minimo, volume });
-    preco = fechado;
-    precoMin = Math.min(precoMin, minimo);
-    precoMax = Math.max(precoMax, maximo);
-    volTotal += volume;
-  }
-  const ultimo = dadosVelas[dadosVelas.length - 1];
-  document.getElementById('precoAtual').textContent = ultimo.fechado.toFixed(6);
-  document.getElementById('abertura').innerHTML = `<span class="usdt-valor">${ultimo.aberto.toFixed(6)} USDT</span>`;
-  document.getElementById('maxima').innerHTML = `<span class="usdt-valor">${precoMax.toFixed(6)} USDT</span>`;
-  document.getElementById('minima').innerHTML = `<span class="usdt-valor">${precoMin.toFixed(6)} USDT</span>`;
-  document.getElementById('volume').innerHTML = `<span class="usdt-valor">${volTotal.toLocaleString('en-US', {minimumFractionDigits:2})} USDT</span>`;
-  const varPct = ((ultimo.fechado - dadosVelas[0].aberto) / dadosVelas[0].aberto) * 100;
-  const elVar = document.getElementById('variacao');
-  elVar.innerHTML = `${varPct >= 0 ? '+' : ''}${varPct.toFixed(2)}%`;
-  elVar.className = `variacao ${varPct < 0 ? 'vermelho' : ''}`;
-  renderizarWebGPU();
-}
-function renderizarWebGPU() {
-  if (!dispositivo || dadosVelas.length === 0) return;
-  const canvas = document.getElementById('canvas');
-  const container = document.getElementById('chartContainer');
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = container.clientWidth * dpr;
-  canvas.height = container.clientHeight * dpr;
-  const dadosVelaBuffer = new Float32Array(dadosVelas.length * 6);
-  dadosVelas.forEach((v, i) => {
-    dadosVelaBuffer[i * 6 + 0] = v.tempo;
-    dadosVelaBuffer[i * 6 + 1] = v.aberto;
-    dadosVelaBuffer[i * 6 + 2] = v.fechado;
-    dadosVelaBuffer[i * 6 + 3] = v.maximo;
-    dadosVelaBuffer[i * 6 + 4] = v.minimo;
-    dadosVelaBuffer[i * 6 + 5] = v.volume;
-  });
-  const velaBuffer = dispositivo.createBuffer({ size: dadosVelaBuffer.byteLength, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
-  dispositivo.queue.writeBuffer(velaBuffer, 0, dadosVelaBuffer);
-  const uniforms = new Float32Array([precoMin, precoMax, 0, 0]);
-  const uniformBuffer = dispositivo.createBuffer({ size: uniforms.byteLength, usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST });
-  dispositivo.queue.writeBuffer(uniformBuffer, 0, uniforms);
-  const bindGroup = dispositivo.createBindGroup({ layout: bindGroupLayout, entries: [{ binding: 0, resource: { buffer: uniformBuffer } },{ binding: 1, resource: { buffer: velaBuffer } }] });
-  const codificador = dispositivo.createCommandEncoder();
-  const alvo = contexto.getCurrentTexture().createView();
-  const pass = codificador.beginRenderPass({ colorAttachments: [{ view: alvo, loadOp: 'clear', clearValue: { r: 0.043, g: 0.055, b: 0.067, a: 1 }, storeOp: 'store' }] });
-  pass.setPipeline(pipeline);
-  pass.setBindGroup(0, bindGroup);
-  for (let i = 0; i < dadosVelas.length; i++) { pass.draw(4, 1, 0, i); pass.draw(4, 1, 4, i); }
-  pass.end();
-  dispositivo.queue.submit([codificador.finish()]);
-}
-document.querySelectorAll('.aba button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.aba button').forEach(b => b.classList.remove('ativo'));
-    btn.classList.add('ativo');
-    gerarDadosVelas(btn.dataset.per);
-  });
-});
-window.addEventListener('load', async () => { await inicializarWebGPU(); gerarDadosVelas('1d'); });
-</script>
-</body>
-</html>      
-      let yAberto = 1.0 - ((v.aberto - u.precoMin) / precoRange) * 2.0;
-      let yFechado = 1.0 - ((v.fechado - u.precoMin) / precoRange) * 2.0;
-      let yMaximo = 1.0 - ((v.maximo - u.precoMin) / precoRange) * 2.0;
-      let yMinimo = 1.0 - ((v.minimo - u.precoMin) / precoRange) * 2.0;
-      
-      let corpoTop = max(yAberto, yFechado);
-      let corpoBase = min(yAberto, yFechado);
-      let cor = select(vec3<f32>(0.031, 0.6, 0.505), vec3<f32>(0.949, 0.211, 0.270), v.fechado < v.aberto);
-      
-      var pos = vec4<f32>(0.0, 0.0, 0.0, 1.0);
-      if vi == 0 { pos = vec4<f32>(x - larguraVela, corpoBase, 0.0, 1.0); }
-      else if vi == 1 { pos = vec4<f32>(x + larguraVela, corpoBase, 0.0, 1.0); }
-      else if vi == 2 { pos = vec4<f32>(x + larguraVela, corpoTop, 0.0, 1.0); }
-      else if vi == 3 { pos = vec4<f32>(x - larguraVela, corpoTop, 0.0, 1.0); }
-      else if vi == 4 { pos = vec4<f32>(x - 0.005, yMinimo, 0.0, 1.0); }
-      else if vi == 5 { pos = vec4<f32>(x + 0.005, yMinimo, 0.0, 1.0); }
-      else if vi == 6 { pos = vec4<f32>(x + 0.005, yMaximo, 0.0, 1.0); }
-      else if vi == 7 { pos = vec4<f32>(x - 0.005, yMaximo, 0.0, 1.0); }
-      
-      var output: VertexOutput;
-      output.pos = pos;
-      output.cor = cor;
-      return output;
+    
+    const adaptador = await navigator.gpu.requestAdapter();
+    if (!adaptador) {
+        statusEl.textContent = '❌ Sem GPU compatível';
+        statusEl.classList.add('indisponivel');
+        return false;
     }
-    @fragment fn fs_vela(input: VertexOutput) -> @location(0) vec4<f32> { return vec4<f32>(input.cor, 1.0); }
-  `;
+    
+    dispositivo = await adaptador.requestDevice();
+    contexto = canvas.getContext('webgpu');
+    formato = navigator.gpu.getPreferredCanvasFormat();
+    contexto.configure({ device: dispositivo, format: formato, alphaMode: 'premultiplied' });
 
-  const moduloShader = dispositivo.createShaderModule({ code: codigoShader });
-  bindGroupLayout = dispositivo.createBindGroupLayout({
-    entries: [
-      { binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },
-      { binding: 1, visibility: GPUShaderStage.VERTEX, buffer: { type: 'read-only-storage' } },
-    ],
-  });
+    const codigoShader = `
+        struct Uniforms { precoMin: f32, precoMax: f32, padding: f32, padding2: f32 }
+        @group(0) @binding(0) var<uniform> u: Uniforms;
+        struct Vela { tempo: f32, aberto: f32, fechado: f32, maximo: f32, minimo: f32, volume: f32 }
+        @group(0) @binding(1) var<storage, read> velas: array<Vela>;
+        
+        struct VertexOutput { @builtin(position) pos: vec4<f32>, @location(0) cor: vec3<f32> }
+        
+        @vertex fn vs_vela(@builtin(vertex_index) vi: u32, @builtin(instance_index) ii: u32) -> VertexOutput {
+            let v = velas[ii];
+            let precoRange = u.precoMax - u.precoMin;
+            let x = (f32(ii) + 0.5) / f32(arrayCount(&velas)) * 2.0 - 1.0;
+            let larguraVela = 1.5 / f32(arrayCount(&velas));
+            
+            let yAberto = 1.0 - ((v.aberto - u.precoMin) / precoRange) * 2.0;
+            let yFechado = 1.0 - ((v.fechado - u.precoMin) / precoRange) * 2.0;
+            let yMaximo = 1.0 - ((v.maximo - u.precoMin) / precoRange) * 2.0;
+            let yMinimo = 1.0 - ((v.minimo - u.precoMin) / precoRange) * 2.0;
+            
+            let corpoTop = max(yAberto, yFechado);
+            let corpoBase = min(yAberto, yFechado);
+            let cor = select(vec3<f32>(0.031, 0.6, 0.505), vec3<f32>(0.949, 0.211, 0.270), v.fechado < v.aberto);
+            
+            var pos = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+            if vi == 0 { pos = vec4<f32>(x - larguraVela, corpoBase, 0.0, 1.0); }
+            else if vi == 1 { pos = vec4<f32>(x + larguraVela, corpoBase, 0.0, 1.0); }
+            else if vi == 2 { pos = vec4<f32>(x + larguraVela, corpoTop, 0.0, 1.0); }
+            else if vi == 3 { pos = vec4<f32>(x - larguraVela, corpoTop, 0.0, 1.0); }
+            else if vi == 4 { pos = vec4<f32>(x - 0.005, yMinimo, 0.0, 1.0); }
+            else if vi == 5 { pos = vec4<f32>(x + 0.005, yMinimo, 0.0, 1.0); }
+            else if vi == 6 { pos = vec4<f32>(x + 0.005, yMaximo, 0.0, 1.0); }
+            else if vi == 7 { pos = vec4<f32>(x - 0.005, yMaximo, 0.0, 1.0); }
+            
+            var output: VertexOutput;
+            output.pos = pos;
+            output.cor = cor;
+            return output;
+        }
+        
+        @fragment fn fs_vela(input: VertexOutput) -> @location(0) vec4<f32> {
+            return vec4<f32>(input.cor, 1.0);
+        }
+    `;
 
-  const layoutPipeline = dispositivo.createPipelineLayout({ bindGroupLayouts: [bindGroupLayout] });
-  pipeline = dispositivo.createRenderPipeline({
-    layout: layoutPipeline,
-    vertex: { module: moduloShader, entryPoint: 'vs_vela' },
-    fragment: { module: moduloShader, entryPoint: 'fs_vela', targets: [{ format: formato }] },
-    primitive: { topology: 'triangle-strip' },
-  });
+    const moduloShader = dispositivo.createShaderModule({ code: codigoShader });
+    
+    bindGroupLayout = dispositivo.createBindGroupLayout({
+        entries: [
+            { binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },
+            { binding: 1, visibility: GPUShaderStage.VERTEX, buffer: { type: 'read-only-storage' } }
+        ]
+    });
+    
+    const layoutPipeline = dispositivo.createPipelineLayout({ bindGroupLayouts: [bindGroupLayout] });
+    
+    pipeline = dispositivo.createRenderPipeline({
+        layout: layoutPipeline,
+        vertex: { module: moduloShader, entryPoint: 'vs_vela' },
+        fragment: { module: moduloShader, entryPoint: 'fs_vela', targets: [{ format: formato }] },
+        primitive: { topology: 'triangle-strip' }
+    });
 
-  statusEl.textContent = '✅ WebGPU ativo';
-  return true;
+    statusEl.textContent = '✅ WebGPU ativo';
+    return true;
 }
 
 function gerarDadosVelas(periodo = '1d') {
-  const agora = Math.floor(Date.now() / 1000);
-  dadosVelas = [];
-  let intervalo = 3600, qtd = 24;
-  if (periodo === '4h') { intervalo = 14400; qtd = 12; }
-  else if (periodo === '1d') { intervalo = 86400; qtd = 30; }
-  else if (periodo === '1w') { intervalo = 604800; qtd = 12; }
-  else if (periodo === '1m') { intervalo = 2592000; qtd = 6; }
+    const agora = Math.floor(Date.now() / 1000);
+    dadosVelas = [];
+    let intervalo = 3600, qtd = 24;
+    
+    if (periodo === '4h') { intervalo = 14400; qtd = 12; }
+    else if (periodo === '1d') { intervalo = 86400; qtd = 30; }
+    else if (periodo === '1w') { intervalo = 604800; qtd = 12; }
+    else if (periodo === '1m') { intervalo = 2592000; qtd = 6; }
 
-  let preco = PRECO_BASE_USDT;
-  precoMin = preco; precoMax = preco; let volTotal = 0;
+    let preco = PRECO_BASE_USDT;
+    precoMin = preco; precoMax = preco; let volTotal = 0;
 
-  for (let i = qtd; i >= 0; i--) {
-    const variacao = (Math.random() - 0.5) * 0.02;
-    const abertura = preco;
-    const fechado = preco * (1 + variacao);
-    const maximo = Math.max(abertura, fechado) * (1 + Math.random() * 0.005);
-    const minimo = Math.min(abertura, fechado) * (1 - Math.random() * 0.005);
-    const volume = Math.random() * 100000 + 50000;
+    for (let i = qtd; i >= 0; i--) {
+        const variacao = (Math.random() - 0.5) * 0.02;
+        const abertura = preco;
+        const fechado = preco * (1 + variacao);
+        const maximo = Math.max(abertura, fechado) * (1 + Math.random() * 0.005);
+        const minimo = Math.min(abertura, fechado) * (1 - Math.random() * 0.005);
+        const volume = Math.random() * 100000 + 50000;
 
-    dadosVelas.push({ tempo: agora - (i * intervalo), aberto: abertura, fechado, maximo, minimo, volume });
-    preco = fechado;
-    precoMin = Math.min(precoMin, minimo);
-    precoMax = Math.max(precoMax, maximo);
-    volTotal += volume;
-  }
+        dadosVelas.push({ tempo: agora - (i * intervalo), aberto: abertura, fechado, maximo, minimo, volume });
+        preco = fechado;
+        precoMin = Math.min(precoMin, minimo);
+        precoMax = Math.max(precoMax, maximo);
+        volTotal += volume;
+    }
 
-  const ultimo = dadosVelas[dadosVelas.length - 1];
-  document.getElementById('precoAtual').textContent = ultimo.fechado.toFixed(6);
-  document.getElementById('abertura').innerHTML = `<span class="usdt-valor">${ultimo.aberto.toFixed(6)} USDT</span>`;
-  document.getElementById('maxima').innerHTML = `<span class="usdt-valor">${precoMax.toFixed(6)} USDT</span>`;
-  document.getElementById('minima').innerHTML = `<span class="usdt-valor">${precoMin.toFixed(6)} USDT</span>`;
-  document.getElementById('volume').innerHTML = `<span class="usdt-valor">${volTotal.toLocaleString('en-US', {minimumFractionDigits:2})} USDT</span>`;
-  
-  const varPct = ((ultimo.fechado - dadosVelas[0].aberto) / dadosVelas[0].aberto) * 100;
-  const elVar = document.getElementById('variacao');
-  elVar.innerHTML = `${varPct >= 0 ? '+' : ''}${varPct.toFixed(2)}%`;
-  elVar.className = `variacao ${varPct < 0 ? 'vermelho' : ''}`;
+    const ultimo = dadosVelas[dadosVelas.length - 1];
+    document.getElementById('precoAtual').textContent = ultimo.fechado.toFixed(6);
+    document.getElementById('abertura').innerHTML = `<span class="usdt-valor">${ultimo.aberto.toFixed(6)} USDT</span>`;
+    document.getElementById('maxima').innerHTML = `<span class="usdt-valor">${precoMax.toFixed(6)} USDT</span>`;
+    document.getElementById('minima').innerHTML = `<span class="usdt-valor">${precoMin.toFixed(6)} USDT</span>`;
+    document.getElementById('volume').innerHTML = `<span class="usdt-valor">${volTotal.toLocaleString('en-US', {minimumFractionDigits:2})} USDT</span>`;
+    
+    const varPct = ((ultimo.fechado - dadosVelas[0].aberto) / dadosVelas[0].aberto) * 100;
+    const elVar = document.getElementById('variacao');
+    elVar.innerHTML = `${varPct >= 0 ? '+' : ''}${varPct.toFixed(2)}%`;
+    elVar.className = `variacao ${varPct < 0 ? 'vermelho' : ''}`;
 
-  renderizarWebGPU();
+    renderizarWebGPU();
 }
 
 function renderizarWebGPU() {
-  if (!dispositivo || dadosVelas.length === 0) return;
-  const canvas = document.getElementById('canvas');
-  const container = document.getElementById('chartContainer');
-  const dpr = window.devicePixelRatio || 1;
-  canvas.width = container.clientWidth * dpr;
-  canvas.height = container.clientHeight * dpr;
+    if (!dispositivo || dadosVelas.length === 0) return;
+    
+    const canvas = document.getElementById('canvas');
+    const container = document.getElementById('chartContainer');
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = container.clientWidth * dpr;
+    canvas.height = container.clientHeight * dpr;
 
-  const dadosVelaBuffer = new Float32Array(dadosVelas.length * 6);
-  dadosVelas.forEach((v, i) => {
-    dadosVelaBuffer[i * 6 + 0] = v.tempo;
-    dadosVelaBuffer[i * 6 + 1] = v.aberto;
-    dadosVelaBuffer[i * 6 + 2] = v.fechado;
-    dadosVelaBuffer[i * 6 + 3] = v.maximo;
-    dadosVelaBuffer[i * 6 + 4] = v.minimo;
-    dadosVelaBuffer[i * 6 + 5] = v.volume;
-  });
+    const dadosVelaBuffer = new Float32Array(dadosVelas.length * 6);
+    dadosVelas.forEach((v, i) => {
+        dadosVelaBuffer[i * 6 + 0] = v.tempo;
+        dadosVelaBuffer[i * 6 + 1] = v.aberto;
+        dadosVelaBuffer[i * 6 + 2] = v.fechado;
+        dadosVelaBuffer[i * 6 + 3] = v.maximo;
+        dadosVelaBuffer[i * 6 + 4] = v.minimo;
+        dadosVelaBuffer[i * 6 + 5] = v.volume;
+    });
 
-  const velaBuffer = dispositivo.createBuffer({
-    size: dadosVelaBuffer.byteLength,
-    usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
-  });
-  dispositivo.queue.writeBuffer(velaBuffer, 0, dadosVelaBuffer);
+    const velaBuffer = dispositivo.createBuffer({
+        size: dadosVelaBuffer.byteLength,
+        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST
+    });
+    dispositivo.queue.writeBuffer(velaBuffer, 0, dadosVelaBuffer);
 
-  const uniforms = new Float32Array([precoMin, precoMax, 0, 0]);
-  const uniformBuffer = dispositivo.createBuffer({
-    size: uniforms.byteLength,
-    usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
-  });
-  dispositivo.queue.writeBuffer(uniformBuffer, 0, uniforms);
+    const uniforms = new Float32Array([precoMin, precoMax, 0, 0]);
+    const uniformBuffer = dispositivo.createBuffer({
+        size: uniforms.byteLength,
+        usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+    });
+    dispositivo.queue.writeBuffer(uniformBuffer, 0, uniforms);
 
-  const bindGroup = dispositivo.createBindGroup({
-    layout: bindGroupLayout,
-    entries: [
-      { binding: 0, resource: { buffer: uniformBuffer } },
-      { binding: 1, resource: { buffer: velaBuffer } },
-    ],
-  });
+    const bindGroup = dispositivo.createBindGroup({
+        layout: bindGroupLayout,
+        entries: [
+            { binding: 0, resource: { buffer: uniformBuffer } },
+            { binding: 1, resource: { buffer: velaBuffer } }
+        ]
+    });
 
-  const codificador = dispositivo.createCommandEncoder();
-  const alvo = contexto.getCurrentTexture().createView();
-  const pass = codificador.beginRenderPass({
-    colorAttachments: [{
-      view: alvo,
-      loadOp: 'clear',
-      clearValue: { r: 0.043, g: 0.055, b: 0.067, a: 1 },
-      storeOp: 'store',
-    }],
-  });
+    const codificador = dispositivo.createCommandEncoder();
+    const alvo = contexto.getCurrentTexture().createView();
+    const pass = codificador.beginRenderPass({
+        colorAttachments: [{
+            view: alvo,
+            loadOp: 'clear',
+            clearValue: { r: 0.043, g: 0.055, b: 0.067, a: 1 },
+            storeOp: 'store'
+        }]
+    });
 
-  pass.setPipeline(pipeline);
-  pass.setBindGroup(0, bindGroup);
-  for (let i = 0; i < dadosVelas.length; i++) {
-    pass.draw(4, 1, 0, i);
-    pass.draw(4, 1, 4, i);
-  }
-  pass.end();
-
-  dispositivo.queue.submit([codificador.finish()]);
+    pass.setPipeline(pipeline);
+    pass.setBindGroup(0, bindGroup);
+    for (let i = 0; i < dadosVelas.length; i++) {
+        pass.draw(4, 1, 0, i);
+        pass.draw(4, 1, 4, i);
+    }
+    pass.end();
+    dispositivo.queue.submit([codificador.finish()]);
 }
 
 document.querySelectorAll('.aba button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.aba button').forEach(b => b.classList.remove('ativo'));
-    btn.classList.add('ativo');
-    gerarDadosVelas(btn.dataset.per);
-  });
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.aba button').forEach(b => b.classList.remove('ativo'));
+        btn.classList.add('ativo');
+        gerarDadosVelas(btn.dataset.per);
+    });
 });
 
 window.addEventListener('load', async () => {
-  await inicializarWebGPU();
-  gerarDadosVelas('1d');
+    const ok = await inicializarWebGPU();
+    gerarDadosVelas('1d');
 });
 </script>
 </body>
